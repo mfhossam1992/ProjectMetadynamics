@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include"Init.hpp"
+#include "MD.hpp"
 
 using namespace std;
 
@@ -51,14 +52,35 @@ int meta_max = 100;
 int meta_tau = 50;
 // cutoff radius for n.n. in Q6
 double meta_rc = 1.2 * pow(2, 1/6); // 1.2 * r_min in LJ
-
+// perform or not mtd
+bool mtd;
 
 // ** end Input Parameters ** //
 
 int main(int argc, const char * argv[]) {
     
-    Init init("fcc",Ncube,L);
-    int N = init.getN();
-    cout<< N<< endl;
+    Init * init = new Init("fcc",Ncube,L,T0,M);
+    
+    auto N = init->getN();
+    cout<< "N = " << N << endl;
+    auto T = init->getT();
+    cout << "T = " << T << endl;
+    auto R = init->getPosition();
+    cout << "\n Positions\n" << endl;
+    for (int i_atom = 0; i_atom < N; ++i_atom) {
+        cout << R[i_atom][0] << " , " << R[i_atom][1] << " , " << R[i_atom][2] << endl;
+               
+    }
+    auto V = init->getVelocity();
+    cout << "\n Velocities\n" << endl;
+    for (int i_atom = 0; i_atom < N; ++i_atom) {
+        cout << V[i_atom][0] << " , " << V[i_atom][1] << " , " << V[i_atom][2] << endl;
+               
+    }
+    
+    MD md(init, anderson, mtd, rc, meta_rc, h);
+    delete init; init = NULL;
+    
+
     return 0;
 }
