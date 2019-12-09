@@ -14,6 +14,12 @@
 #include <complex>
 #include <vector>
 #include <fstream>
+#include <iostream>
+#include <random>
+
+#ifdef BOOST
+#include <boost/math/special_functions/spherical_harmonic.hpp>>
+#endif
 using namespace std;
 
 class MD {
@@ -22,20 +28,29 @@ class MD {
     double ** V;
     double ** nR;
     double ** nV;
+    double ** F;
+    double ** A;
+    double ** nF;
+    double ** nA;
     vector<double> S; // updated gaussian center positions
     int n_gauss = 0; // number of added gaussians
+    double Ta; // Anderson theromstat temperature
+    double eta; // Anderson thermostat parameter
+    string output_fileName;
+    string traj_filename;
+    int steps;
     //same variables as in Init Class
     int N ;
     int dim = 3; // default
     double L = 4; // default = 4
-    double T0 = 1; // default
+    double T0 = 1; // initial Temperature (from init->getT())
     double M = 48; // default for Argon 
     // gain from constructor
     bool anderson;//do thermostat or not
     bool mtd; // perform mtd or not
     double rc;//LJ cutoff
     double metarc;// n.n. cutoff for Q6
-    double h;//timesteo
+    double h;//timestep
     //variables corresponding to the return of each function which became void
     double my_distance_ = 0;//variable updated via my_distance() method
     double my_kinetic_energy_ = 0;//updated via my_kinetic_energy() method
@@ -75,11 +90,11 @@ class MD {
     
     //functions in output.py
     void output(string, string); // filename, thermo_output
-    void write_xyz(string, double **); //filename,(natom,ndim) position array
+    void write_xyz(string, double ** &); //filename,(natom,ndim) position array
 public:
-    MD(Init*&, bool anderson, bool mtd, double rc_, double meta_rc_, double h_); // anderson, mtd
+    MD(Init*&, bool anderson, double Ta_, double eta_,bool mtd, double rc_, double meta_rc_, double h_, string output_fileName_, int steps,string trajFileName); // pointer to Init Object, anderson, thermostat desired temperature, thermostat parameter,mtd, lj rc, mtd nn cutoff, timestep size, outputfileName, total number of MD steps, xyz trajectory file name
     virtual ~MD();
-    void simulate();
+    void simulate(); // main function to perform simulation
     //double * simulate_mtd();
    
 

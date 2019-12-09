@@ -19,27 +19,29 @@ using namespace std;
 // mass
 double M = 48.0;
 // Number of Particles Per dimension
-int Ncube = 4;
+int Ncube = 4 ;
 // Box Side Length
+//double L = 4;
 double L = 1.56 * Ncube;
 // Initial Temperature
-double T0 = 1;
+double T0 = 0.5;
 // System Temperature
-double Ta = 2;
+double Ta = 1;
 
 // ************* MD ************* //
 
 // cutoff radius
-double rc = L/2;
+double rc = L/2;//
 //Anderson Thermostate
 bool anderson = true;
 double eta = 0.3125;
 // Output Atomic Trajcetory filename
-string fileName = "out_traj";
+string fileName = "thermo.txt";
+string trajFileName = "md.xyz";
 // total numern of time steps
-int steps = 5000;
+int steps = 2000;
 // time step size
-double h = 0.032;
+double h = 0.032;//
 
 // ************* MeTaD ************* //
 
@@ -53,7 +55,7 @@ int meta_tau = 50;
 // cutoff radius for n.n. in Q6
 double meta_rc = 1.2 * pow(2, 1/6); // 1.2 * r_min in LJ
 // perform or not mtd
-bool mtd;
+bool mtd = false;
 
 // ** end Input Parameters ** //
 
@@ -65,22 +67,22 @@ int main(int argc, const char * argv[]) {
     cout<< "N = " << N << endl;
     auto T = init->getT();
     cout << "T = " << T << endl;
-    auto R = init->getPosition();
-    cout << "\n Positions\n" << endl;
-    for (int i_atom = 0; i_atom < N; ++i_atom) {
-        cout << R[i_atom][0] << " , " << R[i_atom][1] << " , " << R[i_atom][2] << endl;
-               
-    }
-    auto V = init->getVelocity();
-    cout << "\n Velocities\n" << endl;
-    for (int i_atom = 0; i_atom < N; ++i_atom) {
-        cout << V[i_atom][0] << " , " << V[i_atom][1] << " , " << V[i_atom][2] << endl;
-               
-    }
-    
-    MD md(init, anderson, mtd, rc, meta_rc, h);
-    delete init; init = NULL;
-    
+    cout << "BOX LENGTH:"<< L <<endl;
+//    auto R = init->getPosition();
+//    cout << "\n Positions\n" << endl;
+//    for (int i_atom = 0; i_atom < N; ++i_atom) {
+//        cout << R[i_atom][0] << " , " << R[i_atom][1] << " , " << R[i_atom][2] << endl;
+//               
+//    }
+//    auto V = init->getVelocity();
+//    cout << "\n Velocities\n" << endl;
+//    for (int i_atom = 0; i_atom < N; ++i_atom) {
+//        cout << V[i_atom][0] << " , " << V[i_atom][1] << " , " << V[i_atom][2] << endl;
+//               
+//    }
+//    
+    MD md(init, anderson, Ta, eta, mtd, rc, meta_rc, h, fileName, steps,trajFileName );
+    md.simulate();
 
     return 0;
 }

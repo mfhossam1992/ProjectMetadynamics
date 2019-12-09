@@ -11,20 +11,33 @@
 using namespace std;
 
 // Constructor
-MD::MD(Init*& init_, bool anderson_, bool mtd_, double rc_, double metarc_, double h_):
+MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double rc_, double metarc_, double h_, string outputfileName, int steps_, string trajFileName_):
     N(init_->getN()),
     dim(init_->getDim()),
     L(init_->getL()),
     T0(init_->getT()),
     anderson(anderson_),
+    Ta(Ta_),
+    eta(eta_),
     mtd(mtd_),
     rc(rc_),
     metarc(metarc_),
-    h(h_)
+    h(h_),
+    output_fileName(outputfileName),
+    steps(steps_),
+    traj_filename(trajFileName_)
 
 {
     alloc_mem(N, dim);
     alloc_mem_rv(N, dim);
+    //double ** Rptr = init_->getPosition();
+    //double ** Vptr = init_->getVelocity();
+    //for (int i_atom = 0; i_atom < N; ++i_atom) {
+    //    for (int i_dim; i_dim < dim; ++i_dim) {
+    //        R[i_atom][i_dim] = Rptr[i_atom][i_dim];
+    //        V[i_atom][i_dim] = Vptr[i_atom][i_dim];
+    //    }
+    //}
     R = init_->getPosition();
     V = init_->getVelocity();
     alloc_mem3(my_displacement_table_, N, N, dim);
@@ -43,12 +56,12 @@ MD::~MD(){
 void MD::alloc_mem(int N_, int dim_=3){
     R = new double *[N_];
     V = new double *[N_];
-#pragma omp parallel for
+//#pragma omp parallel for
     for (int i =0; i<N_; ++i) {
         R[i] = new double[dim_]; // 3-dim
         V[i] = new double [dim_]; // 3-dim
     }
-#pragma omp critical
+//#pragma omp critical
     {
         
     }
@@ -57,12 +70,12 @@ void MD::alloc_mem(int N_, int dim_=3){
 void MD::alloc_mem_rv(int N_, int dim_=3){
     nR = new double *[N_];
     nV = new double *[N_];
-#pragma omp parallel for
+//#pragma omp parallel for
     for (int i =0; i<N_; ++i) {
         nR[i] = new double[dim_]; // 3-dim
         nV[i] = new double [dim_]; // 3-dim
     }
-#pragma omp critical
+//#pragma omp critical
     {
         
     }
@@ -71,11 +84,11 @@ void MD::alloc_mem_rv(int N_, int dim_=3){
 //memory allocation for passed double pointer
 void MD::alloc_mem2(double ** & dptr, int dim1, int dim2){
     dptr = new double *[dim1];
-#pragma omp parallel for
+//#pragma omp parallel for
     for (int i =0; i<dim1; ++i) {
         dptr[i] = new double[dim2];
     }
-    #pragma omp critical
+//    #pragma omp critical
     {
         
     }
@@ -84,14 +97,14 @@ void MD::alloc_mem2(double ** & dptr, int dim1, int dim2){
 //memory allocation for passed triple pointer
 void MD::alloc_mem3(double *** & dptr, int dim1, int dim2, int dim3){
     dptr = new double **[dim1];
-#pragma omp parallel for
+//#pragma omp parallel for
     for (int i =0; i<dim1; ++i) {
         dptr[i] = new double * [dim2];
         for (int j = 0; j < dim2; ++j) {
             dptr[i][j] = new double[dim3];
         }
     }
-    #pragma omp critical
+//    #pragma omp critical
     {
         
     }
@@ -176,7 +189,7 @@ void MD::my_kinetic_energy(double **& vel){
 
 void MD::get_displacement_table(double **& R){
     double * disp = new double[dim];
-    #pragma omp parallel for
+//    #pragma omp parallel for
     for (int i_atom1 = 0; i_atom1 < N; ++i_atom1) {
         for (int i_atom2 = i_atom1; i_atom2 < N; ++i_atom2) {
             for (int i_dim = 0; i_dim < dim; ++i_dim) {
@@ -190,7 +203,7 @@ void MD::get_displacement_table(double **& R){
              
         }
     }
-    #pragma omp critical
+//    #pragma omp critical
     {
         
     }
@@ -200,7 +213,7 @@ void MD::get_displacement_table(double **& R){
 
 void MD::get_distance_table(double ***& disp_table){
     double * disp = new double[dim];
-    #pragma omp parallel for
+//    #pragma omp parallel for
     for (int i_atom1 = 0; i_atom1 < N; ++i_atom1) {
         for (int i_atom2 = i_atom1; i_atom2 < N; ++i_atom2) {
             for (int i_dim = 0; i_dim < dim; ++i_dim) {
@@ -212,7 +225,7 @@ void MD::get_distance_table(double ***& disp_table){
              
         }
     }
-    #pragma omp critical
+//    #pragma omp critical
     {
         
     }
@@ -252,7 +265,8 @@ void MD::my_force_on(int i_tagged, double **& pos ){
         }
         double * rij = new double[dim];
         for (int i_dim = 0; i_dim < dim; ++i_dim) {
-            rij[i_dim] = pos[i_atom][i_dim] - pos [i_tagged][i_dim];
+            rij[i_dim] = pos[i_tagged][i_dim] - pos [i_atom][i_dim];
+            my_disp_in_box(rij);
             
         }
         my_distance(rij);
@@ -281,4 +295,143 @@ void MD::my_pressure(double & T, double **& R, double **& Forces){
         }
     }
     my_pressure_ = (N * T + (virial /3)) / V;
+}
+
+// output.py
+void MD::output(string fileName, string line){
+    cout << line << endl;
+    ofstream output_file;
+    output_file.open(fileName, ios_base::app);
+    output_file << line << endl;
+    output_file.close();
+    
+}
+
+void MD::simulate(){
+    MD::output(output_fileName, "steps, temperature, pressure, energy, Q6\n");
+    alloc_mem2(F, N, dim);
+    alloc_mem2(A, N, dim);
+    alloc_mem2(nF, N, dim);
+    alloc_mem2(nA, N, dim);
+    
+    for (int i_t = 0; i_t < steps; ++i_t) {
+        //FOR DEBUG
+        //cout <<"\n\n\n\n\n\n\n THIS IS THE "<<to_string(i_t)<<"TH ITERATION\n\n\n\n\n\n\n\n";
+        //END FOR DEBUG
+        // Anderson Thermostat
+        if (anderson == true) {
+            double sigma = pow((Ta / M), 0.5);
+            double mean = 0;
+            for (int i_atom = 0; i_atom < N; ++i_atom) {
+                if ((rand()/double(RAND_MAX)) < eta * h) {
+                    for (int i_dim = 0; i_dim < dim; ++i_dim) {
+                        std::random_device rd{};
+                        std::mt19937 gen{rd()};
+                        std::normal_distribution<> dist{mean,sigma};
+                        V[i_atom][i_dim] = dist(gen);
+                    }
+
+                }
+            }
+        }
+
+        // *********** Propagation ************** //
+        // Calculate Forces
+        #pragma omp parallel for
+        for (int i_atom = 0; i_atom < N; ++i_atom) {
+            my_force_on(i_atom, R);
+            for (int i_dim = 0; i_dim < dim; ++i_dim) {
+                F[i_atom][i_dim] = my_force_on_[i_dim];
+                A[i_atom][i_dim] = (1/M) * F[i_atom][i_dim];
+            }
+        }
+        #pragma omp critical
+        {
+            
+        }
+        // Calculate new Positions
+        verletNextR(nR, R, V, A, h);
+//        //DEBUG
+//        cout << "\n Unwrapped NEW POSITION\n" ;
+//        for (int i_atom = 0; i_atom < N; ++i_atom) {
+//            cout << nR[i_atom][0] << " , " << nR[i_atom][1] << " , " << nR[i_atom][2] << endl;
+//
+//        }
+        my_pos_in_box(nR);
+//        cout << "\n NEW POSITION\n" ;
+//        for (int i_atom = 0; i_atom < N; ++i_atom) {
+//            cout << nR[i_atom][0] << " , " << nR[i_atom][1] << " , " << nR[i_atom][2] << endl;
+//
+//        }
+//
+//        //END_DEBUG
+
+        // Calculate Forces with new Positions
+        #pragma omp parallel for
+        for (int i_atom = 0; i_atom < N; ++i_atom) {
+            my_force_on(i_atom, nR);
+            for (int i_dim = 0; i_dim < dim; ++i_dim) {
+                nF[i_atom][i_dim] = my_force_on_[i_dim];
+                nA[i_atom][i_dim] = (1/M) * nF[i_atom][i_dim];
+            }
+        }
+        #pragma omp critical
+    {
+            
+        }
+        // Get Displacement Table
+        get_displacement_table(nR);
+        get_distance_table(my_displacement_table_);
+        // MetaDynamics Bias Forces (Still want to implement)
+        
+        // Calculate New velocities
+        verletNextV(nV, V, A, nA, h);
+        // update positions
+#pragma omp parallel for
+        for (int i_atom = 0; i_atom < N; ++i_atom) {
+            for (int i_dim = 0; i_dim < dim; ++i_dim) {
+                R[i_atom][i_dim] = nR [i_atom][i_dim];
+                V[i_atom][i_dim] = nV [i_atom][i_dim];
+            }
+        }
+        #pragma omp critical
+        {
+            
+        }
+        // Measuring physical Quantities
+        my_kinetic_energy(V);
+        my_temperature(my_kinetic_energy_);
+        my_potential_energy(my_distance_table_);
+        double E_tot = my_kinetic_energy_ + my_potential_energy_;
+        my_pressure(my_temperature_, R, nF);
+                // left is meta_Q6 method -- calculate_Q6()
+        
+        // output results
+        if (i_t  % 50 == 0) {
+            int step = i_t + 1;
+            //cout.precision(15);
+            //cout<<my_temperature_;
+            #pragma omp critical
+            {
+                
+            string output_line = to_string(step) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "; // remaining + Q6
+            output(output_fileName, output_line);
+            write_xyz(traj_filename, R);
+        }
+            
+        }
+    }
+    
+}
+
+void MD::write_xyz(string traj_file_name, double ** & pos){
+    ofstream output_file;
+    output_file.open(traj_file_name, ios_base::app);
+    output_file << to_string(N) << endl;
+    output_file << "Atom Positions" << endl;
+    for (int i_atom = 0; i_atom < N; ++i_atom) {
+           output_file << "Ar\t" << to_string(pos[i_atom][0])<<"  "<< to_string(pos[i_atom][1])<<"  "<<to_string(pos[i_atom][2])<<"  "<<endl;
+            }
+    output_file.close();
+    
 }

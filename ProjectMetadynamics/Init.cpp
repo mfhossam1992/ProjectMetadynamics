@@ -215,7 +215,7 @@ void Init::gen_ran_vel(int N_, double T0_, double M_, unsigned int seed = 1){
     }
     #pragma omp critical
     {
-        
+
     }
     
     
