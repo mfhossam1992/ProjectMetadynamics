@@ -33,7 +33,7 @@ class MD {
     double ** nF;
     double ** nA;
     vector<double> S; // updated gaussian center positions
-    int n_gauss = 0; // number of added gaussians
+    //int n_gauss = 0; // number of added gaussians (Re-Decalred beneath with bunch of other MTD variables)
     double Ta; // Anderson theromstat temperature
     double eta; // Anderson thermostat parameter
     string output_fileName;

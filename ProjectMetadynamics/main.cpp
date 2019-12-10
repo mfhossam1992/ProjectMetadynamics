@@ -19,9 +19,9 @@ using namespace std;
 // mass
 double M = 48.0;
 // Number of Particles Per dimension
-int Ncube = 8 ;
+int Ncube = 4 ;
 // Box Side Length
-double L = 8;
+double L = 4;
 //double L = 1.56 * Ncube;
 // Initial Temperature
 double T0 = 0.5;
@@ -55,7 +55,7 @@ int meta_tau = 50;
 // cutoff radius for n.n. in Q6
 double meta_rc = 1.2 * pow(2, 1/6); // 1.2 * r_min in LJ
 // perform or not mtd
-bool mtd = false;
+bool mtd = true;
 
 // ** end Input Parameters ** //
 
@@ -80,9 +80,16 @@ int main(int argc, const char * argv[]) {
 //        cout << V[i_atom][0] << " , " << V[i_atom][1] << " , " << V[i_atom][2] << endl;
 //               
 //    }
-//    
-    MD md(init, anderson, Ta, eta, mtd, rc, meta_rc, h, fileName, steps,trajFileName );
-    md.simulate();
+//
+    if (mtd == false) {
+        MD md(init, anderson, Ta, eta, mtd, rc, meta_rc, h, fileName, steps,trajFileName );
+        md.simulate();
+
+    } else {
+        MD md(init, anderson, Ta, eta, mtd, meta_w, meta_sigma, meta_max, meta_tau,rc, meta_rc, h, fileName, steps,trajFileName );
+        md.simulate();
+
+    }
 
     return 0;
 }

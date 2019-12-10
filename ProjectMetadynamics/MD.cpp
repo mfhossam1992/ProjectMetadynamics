@@ -471,9 +471,11 @@ void MD::simulate(){
             {
                 if (mtd == false) {
                     calculate_Q6(Q_6,my_distance_table_, my_displacement_table_);
+                    string output_line = to_string(step) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "+ to_string(Q_6);
+
 
                 }
-            string output_line = to_string(step) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "+ to_string(Q_6); // remaining + Q6
+            string output_line = to_string(step) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "+ to_string(meta_Q6); 
             output(output_fileName, output_line);
             write_xyz(traj_filename, R);
         }

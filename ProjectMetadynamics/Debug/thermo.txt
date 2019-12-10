@@ -189,3 +189,12 @@ steps, temperature, pressure, energy, Q6
 steps, temperature, pressure, energy, Q6
 
 1  0.497804  0.517921  -1736.941029  0.353551
+steps, temperature, pressure, energy, Q6
+
+1  0.493930  0.538182  -105.880600  0.000000
+51  1.039790  2.666709  -114.369270  0.000000
+101  1.052264  0.477655  -143.306623  0.000000
+steps, temperature, pressure, energy, Q6
+
+1  0.529062  0.594156  -102.414450  0.353533
+51  1.253842  3.211313  -108.989956  0.171345
