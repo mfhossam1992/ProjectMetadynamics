@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>10</integer>
+	<key>logs</key>
+	<dict>
+		<key>B2944640-4DB4-4396-8CE3-F2ECEEFE63E3</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogMajorGroupSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.target.product-type.tool</string>
+			<key>fileName</key>
+			<string>B2944640-4DB4-4396-8CE3-F2ECEEFE63E3.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>signature</key>
+			<string>ProjectMetadynamics-fqatejxuktyusmekyyigoykbjieu</string>
+			<key>timeStartedRecording</key>
+			<real>597709916.06856799</real>
+			<key>timeStoppedRecording</key>
+			<real>597709918.31537795</real>
+			<key>title</key>
+			<string>Build target ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>B2944640-4DB4-4396-8CE3-F2ECEEFE63E3</string>
+		</dict>
+	</dict>
+	<key>preserveOldLogs</key>
+	<true/>
+</dict>
+</plist>

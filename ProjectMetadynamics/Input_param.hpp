@@ -30,9 +30,10 @@ public:
     // mass
     double M = 48.0;
     // Number of Particles Per dimension
-    int Ncube = 4;
+    int Ncube = 3;
     // Box Side Length
-    double L = 1.56 * Ncube;
+    // double L = 1.56 * Ncube; // not dense enough
+    double L = 0.93 * Ncube;
     // Initial Temperature
     double T0 = 1;
     // System Temperature
@@ -58,7 +59,7 @@ public:
     double meta_w = 0.1; // height
     double meta_sigma = 0.1; // width
     // Maximum Number of Gaussian
-    int meta_max = 100;
+    int meta_max = 1000;
     // frequency
     int meta_tau = 50;
     // cutoff radius for n.n. in Q6

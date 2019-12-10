@@ -463,24 +463,32 @@ void MD::simulate(){
                 // left is meta_Q6 method -- calculate_Q6()
         
         // output results
-        if (i_t  % 50 == 0) {
-            int step = i_t + 1;
+        //if (i_t  % 50 == 0) {
+            //int step = i_t + 1;
             //cout.precision(15);
             //cout<<my_temperature_;
-            #pragma omp critical
-            {
+         //   #pragma omp critical
+         //   {
                 if (mtd == false) {
                     calculate_Q6(Q_6,my_distance_table_, my_displacement_table_);
-                    string output_line = to_string(step) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "+ to_string(Q_6);
+                    string output_line = to_string(i_t) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "+ to_string(Q_6);
+                    output(output_fileName, output_line);
+
 
 
                 }
-            string output_line = to_string(step) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "+ to_string(meta_Q6); 
-            output(output_fileName, output_line);
-            write_xyz(traj_filename, R);
+                else{
+                    string output_line = to_string(i_t) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "+ to_string(meta_Q6);
+                    output(output_fileName, output_line);
+
+                }
+        if (i_t % 100 == 0) {
+                        write_xyz(traj_filename, R);
+
         }
+       // }
             
-        }
+       // }
     }
     
 }
@@ -606,8 +614,11 @@ void MD::meta(double ** & nF_, int i_t_, double ** & pos){
     //calculate the derivative of the history-dependent potential w.r.t s=meta_Q6
     double dV_ds = 0;
     for (auto & s_tau : S) {
+        //DEBUG
+        //cout << s_tau<<" ; "<< meta_Q6 << endl;
+        // END_DEBUG
         double gauss = meta_w * exp(- pow((meta_Q6 - s_tau), 2) / (2 * pow(meta_sig, 2)));
-        dV_ds += gauss * pow((meta_Q6 - s_tau), 2) / (2 * pow(meta_sig, 2));
+        dV_ds += (-1) * gauss * (meta_Q6 - s_tau) / pow(meta_sig, 2);
     }
     // Bias_the_force
     for (int i_atom = 0; i_atom < N; ++ i_atom) {
