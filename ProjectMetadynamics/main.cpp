@@ -24,9 +24,9 @@ int Ncube = 4 ;
 double L = 4;
 //double L = 1.56 * Ncube;
 // Initial Temperature
-double T0 = 0.5;
+double T0 = 0.55;
 // System Temperature
-double Ta = 0.51;
+double Ta = 0.55;
 
 // ************* MD ************* //
 
@@ -51,7 +51,7 @@ double meta_sigma = 0.1; // width
 // Maximum Number of Gaussian
 int meta_max = 100;
 // frequency
-int meta_tau = 50;
+int meta_tau = 100;
 // cutoff radius for n.n. in Q6
 double meta_rc = 1.2 * pow(2, 1/6); // 1.2 * r_min in LJ
 // perform or not mtd

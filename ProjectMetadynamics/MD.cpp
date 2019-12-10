@@ -579,6 +579,7 @@ void MD::calculate_ds_dr(double **  & pos){
             }
             calculate_Q6(meta_n_Q6, meta_n_my_distance_table_, meta_n_my_displacement_table_);
             ds_dr[i_atom1][i_dim] = (meta_n_Q6 - meta_Q6) / d;
+            meta_nR[i_atom1][i_dim] -= d;
         }
     }
     
