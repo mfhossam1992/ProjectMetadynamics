@@ -10,7 +10,7 @@
 
 using namespace std;
 
-// Constructor
+// Constructor1_wo_mtd_bias
 MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double rc_, double metarc_, double h_, string outputfileName, int steps_, string trajFileName_):
     N(init_->getN()),
     dim(init_->getDim()),
@@ -21,7 +21,7 @@ MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double r
     eta(eta_),
     mtd(mtd_),
     rc(rc_),
-    metarc(metarc_),
+    meta_rc(metarc_),
     h(h_),
     output_fileName(outputfileName),
     steps(steps_),
@@ -43,6 +43,60 @@ MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double r
     alloc_mem3(my_displacement_table_, N, N, dim);
     alloc_mem2(my_distance_table_, N, N);
     my_force_on_ = new double [dim];
+    if (mtd_ == true) {
+        alloc_mem2(ds_dr, N, dim);
+        alloc_mem2(meta_nR, N, dim);
+        alloc_mem3(meta_n_my_displacement_table_, N, N, dim);
+        alloc_mem2(meta_n_my_distance_table_, N, N);
+
+    }
+    
+}
+// Constructor2_w_mtd_bias
+MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double meta_w_, double meta_sig_, int max_n_gauss_, int meta_tau_, double rc_, double metarc_, double h_, string outputfileName, int steps_, string trajFileName_):
+    N(init_->getN()),
+    dim(init_->getDim()),
+    L(init_->getL()),
+    T0(init_->getT()),
+    anderson(anderson_),
+    Ta(Ta_),
+    eta(eta_),
+    mtd(mtd_),
+    meta_w(meta_w_),
+    meta_sig(meta_sig_),
+    max_n_gauss(max_n_gauss_),
+    meta_tau(meta_tau_),
+    rc(rc_),
+    meta_rc(metarc_),
+    h(h_),
+    output_fileName(outputfileName),
+    steps(steps_),
+    traj_filename(trajFileName_)
+
+{
+    alloc_mem(N, dim);
+    alloc_mem_rv(N, dim);
+    //double ** Rptr = init_->getPosition();
+    //double ** Vptr = init_->getVelocity();
+    //for (int i_atom = 0; i_atom < N; ++i_atom) {
+    //    for (int i_dim; i_dim < dim; ++i_dim) {
+    //        R[i_atom][i_dim] = Rptr[i_atom][i_dim];
+    //        V[i_atom][i_dim] = Vptr[i_atom][i_dim];
+    //    }
+    //}
+    R = init_->getPosition();
+    V = init_->getVelocity();
+    alloc_mem3(my_displacement_table_, N, N, dim);
+    alloc_mem2(my_distance_table_, N, N);
+    my_force_on_ = new double [dim];
+    if (mtd_ == true) {
+        alloc_mem2(ds_dr, N, dim);
+        alloc_mem2(meta_nR, N, dim);
+        alloc_mem3(meta_n_my_displacement_table_, N, N, dim);
+        alloc_mem2(meta_n_my_distance_table_, N, N);
+        n_gauss = 0;
+
+    }
     
 }
 //Destructor
@@ -187,7 +241,7 @@ void MD::my_kinetic_energy(double **& vel){
 
 }
 
-void MD::get_displacement_table(double **& R){
+void MD::get_displacement_table(double *** & disp_table, double **& R){
     double * disp = new double[dim];
 //    #pragma omp parallel for
     for (int i_atom1 = 0; i_atom1 < N; ++i_atom1) {
@@ -197,8 +251,8 @@ void MD::get_displacement_table(double **& R){
             }
             my_disp_in_box(disp);
             for (int i_dim = 0; i_dim < dim; ++i_dim) {
-                my_displacement_table_[i_atom1][i_atom2][i_dim] =  disp[i_dim];
-                my_displacement_table_[i_atom2][i_atom1][i_dim] =  disp[i_dim];
+                disp_table[i_atom1][i_atom2][i_dim] =  disp[i_dim];
+                disp_table[i_atom2][i_atom1][i_dim] =  disp[i_dim];
             }
              
         }
@@ -211,7 +265,7 @@ void MD::get_displacement_table(double **& R){
     
 }
 
-void MD::get_distance_table(double ***& disp_table){
+void MD::get_distance_table(double ** & dist_table, double ***& disp_table){
     double * disp = new double[dim];
 //    #pragma omp parallel for
     for (int i_atom1 = 0; i_atom1 < N; ++i_atom1) {
@@ -220,8 +274,8 @@ void MD::get_distance_table(double ***& disp_table){
                 disp[i_dim] = disp_table[i_atom1][i_atom2][i_dim];
             }
             my_distance(disp);
-            my_distance_table_[i_atom1][i_atom2] = my_distance_;
-            my_distance_table_[i_atom2][i_atom1] = my_distance_;
+            dist_table[i_atom1][i_atom2] = my_distance_;
+            dist_table[i_atom2][i_atom1] = my_distance_;
              
         }
     }
@@ -235,7 +289,7 @@ void MD::get_distance_table(double ***& disp_table){
 void MD::my_potential_energy(double **& dist_table){
     double vshift = 4 * pow(rc, -6) * (pow(rc,-6)-1);
     my_potential_energy_ = 0;
-    #pragma omp parallel for
+//    #pragma omp parallel for
     for (int i_atom1 = 0; i_atom1 < N; ++i_atom1) {
         for (int i_atom2 = i_atom1 + 1; i_atom2 < N; ++i_atom2) {
             double r = dist_table[i_atom1][i_atom2];
@@ -246,16 +300,16 @@ void MD::my_potential_energy(double **& dist_table){
             
         }
     }
-    #pragma omp critical
-    {
-        
-    }
+//    #pragma omp critical
+//    {
+//
+//    }
 
 
 }
 
 void MD::my_force_on(int i_tagged, double **& pos ){
-    #pragma omp parallel for
+   #pragma omp parallel for
     for (int i_dim = 0; i_dim < dim; ++i_dim) {
         my_force_on_[i_dim] = 0; // initialize the force to zero everytime
     }
@@ -380,10 +434,12 @@ void MD::simulate(){
             
         }
         // Get Displacement Table
-        get_displacement_table(nR);
-        get_distance_table(my_displacement_table_);
+        get_displacement_table(my_displacement_table_,nR);
+        get_distance_table(my_distance_table_,my_displacement_table_);
         // MetaDynamics Bias Forces (Still want to implement)
-        
+        if (mtd == true) {
+            meta(nF, i_t, nR);
+        }
         // Calculate New velocities
         verletNextV(nV, V, A, nA, h);
         // update positions
@@ -413,8 +469,11 @@ void MD::simulate(){
             //cout<<my_temperature_;
             #pragma omp critical
             {
-                
-            string output_line = to_string(step) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "; // remaining + Q6
+                if (mtd == false) {
+                    calculate_Q6(Q_6,my_distance_table_, my_displacement_table_);
+
+                }
+            string output_line = to_string(step) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "+ to_string(Q_6); // remaining + Q6
             output(output_fileName, output_line);
             write_xyz(traj_filename, R);
         }
@@ -434,4 +493,123 @@ void MD::write_xyz(string traj_file_name, double ** & pos){
             }
     output_file.close();
     
+}
+
+
+void MD::calculate_Qlm(int l, int m, double ** & dist_table, double *** & displacement_table){
+    Q_lm_r_ = 0; // initialize to zero
+    Q_lm_i_ = 0; // initialize to zero
+    double n_bonds = 0;
+    for (int i_atom1 = 0; i_atom1 < N; ++i_atom1) {
+        for (int i_atom2 = i_atom1 + 1; i_atom2 < N; ++ i_atom2) {
+            double r = dist_table[i_atom1][i_atom2];
+            if (r <= meta_rc) {
+                n_bonds += 1;
+                double * rhat = new double[3];
+                for (int i_dim = 0; i_dim < dim; ++i_dim) {
+                    rhat[i_dim] = displacement_table[i_atom1][i_atom2][i_dim] / r;
+                }
+                double theta = acos(rhat[2]);
+                double phi = atan2(rhat[1], rhat[0]);
+                Q_lm_r_ += boost::math::spherical_harmonic_r(l, m, theta, phi);
+                Q_lm_i_ += boost::math::spherical_harmonic_i(l, m, theta, phi);
+
+            }
+
+        }
+    }
+    if (n_bonds != 0) {
+        Q_lm_r_ /= n_bonds;
+        Q_lm_i_ /= n_bonds;
+    }
+    
+    
+}
+
+void MD::calculate_Ql(int l, double ** & dist_table, double *** & displacement_table){
+    Q_l = 0; // initialize to zero
+    calculate_Qlm(l,0,dist_table,displacement_table); // calculate m = 0 term first and append it
+    Q_l = pow(Q_lm_r_, 2) + pow(Q_lm_i_, 2);
+    for (int i_m = 1; i_m < (l+1); ++i_m) { // range of i_m is from 1 to l instead from -l to l because of symmetry around i_m = 0
+        calculate_Qlm(l,i_m,dist_table,displacement_table);
+        Q_l += 2 * (pow(Q_lm_r_, 2) + pow(Q_lm_i_, 2)); // because the squares are the same from i_m -l range as the +l range, excluding the m = zero term, then I calculate one side and multiply by 2 instead of going from -l to l in the loop
+        
+    }
+    Q_l = sqrt((4 * M_PI * Q_l)/(2 * l + 1));
+}
+
+void MD::calculate_Q6(double & Q6, double ** & dist_table_, double *** & displacement_table_){
+    calculate_Ql(6,dist_table_, displacement_table_);
+    Q6 = Q_l;
+}
+
+void MD::calculate_ds_dr(double **  & pos){
+    double d = 0.001;
+    //make copies of current pos, disp_table, distance_table and store them
+    for (int i_atom = 0; i_atom < N; ++i_atom) {
+        for (int i_dim = 0; i_dim < dim; ++i_dim) {
+            meta_nR[i_atom][i_dim] = pos[i_atom][i_dim];
+        }
+    }
+    get_displacement_table(meta_n_my_displacement_table_, meta_nR); // makes a copy of current displacement table by actually re-calculate it since it is of comparable complexity
+    get_distance_table(meta_n_my_distance_table_, meta_n_my_displacement_table_);//makes a copy of current displacement table by actually re-calculate it since it is of comparable complexity
+    calculate_Q6(meta_Q6, my_distance_table_, my_displacement_table_); // calculates the current un-shifted value of Q_6
+    // END_OF_MAKING_COPIES_AND_CALCULATIONS_Prior_TO_SHIFTING
+    
+    //START SHIFTING
+    double * disp_ = new double[dim];
+    for (int i_atom1 = 0; i_atom1 < N; ++i_atom1) {
+        for (int i_dim = 0; i_dim < dim; ++i_dim) {
+            meta_nR[i_atom1][i_dim] += d;
+            for (int i_atom2 = 0; i_atom2 < N; ++i_atom2) {
+                for (int i_dim_ = 0; i_dim_ < dim; ++ i_dim_) {
+                    disp_[i_dim_] = meta_nR[i_atom1][i_dim_] - meta_nR[i_atom2][i_dim_];
+                }
+                my_disp_in_box(disp_);
+                for (int i_dim_ = 0; i_dim_ < dim; ++ i_dim_) {
+                    meta_n_my_displacement_table_[i_atom1][i_atom2][i_dim_] = disp_[i_dim_];
+                    meta_n_my_displacement_table_[i_atom2][i_atom1][i_dim_] = disp_[i_dim_];
+                }
+                my_distance(disp_);
+                meta_n_my_distance_table_[i_atom1][i_atom2] = my_distance_;
+                meta_n_my_distance_table_[i_atom2][i_atom1] = my_distance_;
+                
+            }
+            calculate_Q6(meta_n_Q6, meta_n_my_distance_table_, meta_n_my_displacement_table_);
+            ds_dr[i_atom1][i_dim] = (meta_n_Q6 - meta_Q6) / d;
+        }
+    }
+    
+}
+
+
+void MD::meta(double ** & nF_, int i_t_, double ** & pos){
+   // number of gaussians by ref(to be incremented continuously, vector of updated gaussian center positions,
+    // calculate the derivative of s w.r.t atom positions
+    calculate_ds_dr(pos);
+    // every tau step, save the value of s = meta_Q6
+    if (i_t_ % meta_tau == 0) {
+        n_gauss += 1;
+        if (n_gauss < max_n_gauss) {
+            S.push_back(meta_Q6);
+            string line = to_string(i_t_) + "  " + to_string(meta_Q6);
+            output("Q6_Gauss_Center.txt", line);
+            
+        } else {
+            cout<<"MAX_NUMBER_OF_GAUSS_EXCEEDED"<<endl;
+            exit(EXIT_SUCCESS);
+        }
+    }
+    //calculate the derivative of the history-dependent potential w.r.t s=meta_Q6
+    double dV_ds = 0;
+    for (auto & s_tau : S) {
+        double gauss = meta_w * exp(- pow((meta_Q6 - s_tau), 2) / (2 * pow(meta_sig, 2)));
+        dV_ds += gauss * pow((meta_Q6 - s_tau), 2) / (2 * pow(meta_sig, 2));
+    }
+    // Bias_the_force
+    for (int i_atom = 0; i_atom < N; ++ i_atom) {
+        for (int i_dim = 0; i_dim < dim; ++i_dim) {
+            nF_[i_atom][i_dim] += (-1) * dV_ds * ds_dr[i_atom][i_dim];
+        }
+    }
 }

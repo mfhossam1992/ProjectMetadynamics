@@ -19,14 +19,14 @@ using namespace std;
 // mass
 double M = 48.0;
 // Number of Particles Per dimension
-int Ncube = 4 ;
+int Ncube = 8 ;
 // Box Side Length
-//double L = 4;
-double L = 1.56 * Ncube;
+double L = 8;
+//double L = 1.56 * Ncube;
 // Initial Temperature
 double T0 = 0.5;
 // System Temperature
-double Ta = 1;
+double Ta = 0.51;
 
 // ************* MD ************* //
 
@@ -39,7 +39,7 @@ double eta = 0.3125;
 string fileName = "thermo.txt";
 string trajFileName = "md.xyz";
 // total numern of time steps
-int steps = 2000;
+int steps = 5000;
 // time step size
 double h = 0.032;//
 
@@ -61,7 +61,7 @@ bool mtd = false;
 
 int main(int argc, const char * argv[]) {
     
-    Init * init = new Init("fcc",Ncube,L,T0,M);
+    Init * init = new Init("sc",Ncube,L,T0,M);
     
     auto N = init->getN();
     cout<< "N = " << N << endl;
