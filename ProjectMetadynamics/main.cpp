@@ -19,11 +19,11 @@ using namespace std;
 // mass
 double M = 48.0;
 // Number of Particles Per dimension
-int Ncube = 2 ;
+int Ncube = 4 ;
 // Box Side Length
 //double L = 4;
-//double L = 1.56 * Ncube;
-double L = 1.49 * Ncube;
+double L = 1.56 * Ncube;
+//double L = 1.49 * Ncube;
 // Initial Temperature
 double T0 = 0.7;
 // System Temperature
@@ -40,15 +40,17 @@ double eta = 0.3125;
 string fileName = "thermo.txt";
 string trajFileName = "md.xyz";
 // total numern of time steps
-int steps = 10000;
+int steps = 50000;
 // time step size
 double h = 0.032;//
 
 // ************* MeTaD ************* //
 
 //Gaussian
-double meta_w = 1; // height
-double meta_sigma = 0.17; // width
+double meta_w = 0.1; // height
+double meta_sigma = 0.1; // width of Q_6
+double meta_sigma_2 = 0.1; // width of potential energy
+int cv = 2; // change this to be 1 in case of only 1 CV (Q6)
 // Maximum Number of Gaussian
 int meta_max = 1000;
 // frequency
@@ -90,8 +92,13 @@ int main(int argc, const char * argv[]) {
         md.simulate();
 
     } else {
-        MD md(init, anderson, Ta, eta, mtd, meta_w, meta_sigma, meta_max, meta_tau,rc, meta_rc, h, fileName, steps,trajFileName );
-        md.simulate();
+        if (cv == 2) {
+            MD md(init, anderson, Ta, eta, mtd, meta_w, meta_sigma, meta_sigma_2,meta_max, meta_tau,rc, meta_rc, h, fileName, steps,trajFileName );
+            md.simulate();
+        } else {
+            MD md(init, anderson, Ta, eta, mtd, meta_w, meta_sigma, meta_max, meta_tau,rc, meta_rc, h, fileName, steps,trajFileName );
+            md.simulate();
+        }
 
     }
 

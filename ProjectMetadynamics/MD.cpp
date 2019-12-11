@@ -99,6 +99,55 @@ MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double m
     }
     
 }
+// Constructor with MTD BIAS with 2 Collective Variables
+MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double meta_w_, double meta_sig_, double meta_sig_2_,int max_n_gauss_, int meta_tau_, double rc_, double metarc_, double h_, string outputfileName, int steps_, string trajFileName_):
+    N(init_->getN()),
+    dim(init_->getDim()),
+    L(init_->getL()),
+    T0(init_->getT()),
+    anderson(anderson_),
+    Ta(Ta_),
+    eta(eta_),
+    mtd(mtd_),
+    meta_w(meta_w_),
+    meta_sig(meta_sig_),
+    meta_sig_2(meta_sig_2_),
+    max_n_gauss(max_n_gauss_),
+    meta_tau(meta_tau_),
+    rc(rc_),
+    meta_rc(metarc_),
+    h(h_),
+    output_fileName(outputfileName),
+    steps(steps_),
+    traj_filename(trajFileName_)
+
+{
+    alloc_mem(N, dim);
+    alloc_mem_rv(N, dim);
+    //double ** Rptr = init_->getPosition();
+    //double ** Vptr = init_->getVelocity();
+    //for (int i_atom = 0; i_atom < N; ++i_atom) {
+    //    for (int i_dim; i_dim < dim; ++i_dim) {
+    //        R[i_atom][i_dim] = Rptr[i_atom][i_dim];
+    //        V[i_atom][i_dim] = Vptr[i_atom][i_dim];
+    //    }
+    //}
+    R = init_->getPosition();
+    V = init_->getVelocity();
+    alloc_mem3(my_displacement_table_, N, N, dim);
+    alloc_mem2(my_distance_table_, N, N);
+    my_force_on_ = new double [dim];
+    if (mtd_ == true) {
+        alloc_mem2(ds_dr, N, dim);
+        alloc_mem2(meta_nR, N, dim);
+        alloc_mem3(meta_n_my_displacement_table_, N, N, dim);
+        alloc_mem2(meta_n_my_distance_table_, N, N);
+        n_gauss = 0;
+
+    }
+    
+}
+
 //Destructor
 MD::~MD(){
     
@@ -436,9 +485,20 @@ void MD::simulate(){
         // Get Displacement Table
         get_displacement_table(my_displacement_table_,nR);
         get_distance_table(my_distance_table_,my_displacement_table_);
+        my_potential_energy(my_distance_table_); // modified its position to be used in metaD_bias
+
         // MetaDynamics Bias Forces (Still want to implement)
         if (mtd == true) {
-            meta(nF, i_t, nR);
+            if (meta_sig_2 != 0) {
+                meta_2(nF, i_t, nR);
+            }
+            else meta(nF, i_t, nR);
+                  
+            for (int i_atom = 0; i_atom < N; ++i_atom) {
+                for (int i_dim = 0; i_dim < dim; ++i_dim) {
+                    nA[i_atom][i_dim] = (1/M) * nF[i_atom][i_dim];
+                }
+            }
         }
         // Calculate New velocities
         verletNextV(nV, V, A, nA, h);
@@ -457,8 +517,8 @@ void MD::simulate(){
         // Measuring physical Quantities
         my_kinetic_energy(V);
         my_temperature(my_kinetic_energy_);
-        my_potential_energy(my_distance_table_);
-        double E_tot = my_kinetic_energy_ + my_potential_energy_;
+        //my_potential_energy(my_distance_table_);
+        double E_tot = my_kinetic_energy_ + my_potential_energy_; // my_potential_energy_ is calculated before MTD BIAS because we use it in bias as well
         my_pressure(my_temperature_, R, nF);
                 // left is meta_Q6 method -- calculate_Q6()
         
@@ -478,8 +538,14 @@ void MD::simulate(){
 
                 }
                 else{
+                    if (meta_sig_2 != 0) {
+                        string output_line = to_string(i_t) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "+ to_string(meta_Q6)+"  "+ to_string(my_potential_energy_);
+                        output(output_fileName, output_line);
+                    }
+                    else {
                     string output_line = to_string(i_t) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "+ to_string(meta_Q6);
                     output(output_fileName, output_line);
+                    }
 
                 }
         if (i_t % 100 == 0) {
@@ -564,6 +630,7 @@ void MD::calculate_ds_dr(double **  & pos){
     get_displacement_table(meta_n_my_displacement_table_, meta_nR); // makes a copy of current displacement table by actually re-calculate it since it is of comparable complexity
     get_distance_table(meta_n_my_distance_table_, meta_n_my_displacement_table_);//makes a copy of current displacement table by actually re-calculate it since it is of comparable complexity
     calculate_Q6(meta_Q6, my_distance_table_, my_displacement_table_); // calculates the current un-shifted value of Q_6
+    // AS for my_potential_energy_ it is already calculated in Simulate function just before calling the meta function to bias forces
     // END_OF_MAKING_COPIES_AND_CALCULATIONS_Prior_TO_SHIFTING
     
     //START SHIFTING
@@ -626,4 +693,39 @@ void MD::meta(double ** & nF_, int i_t_, double ** & pos){
             nF_[i_atom][i_dim] += (-1) * dV_ds * ds_dr[i_atom][i_dim];
         }
     }
+}
+
+void MD::meta_2(double ** & nF_, int i_t_, double ** & pos){
+    // calculate the derivative of s w.r.t atom positions -- this also calculates inside it the current value of meta_Q6
+    calculate_ds_dr(pos);
+    // every tau step, save the value of s = meta_Q6 and s_2 = my_potential_energy_
+    if (i_t_ % meta_tau == 0) {
+        n_gauss += 1;
+        if (n_gauss < max_n_gauss) {
+            S.push_back(meta_Q6);
+            S_2.push_back(my_potential_energy_);
+            string line = to_string(i_t_) + "  " + to_string(meta_Q6)+ "  " + to_string(my_potential_energy_);
+            output("Q6_PE_Gauss_Centers.txt", line);
+            
+        } else {
+            cout<<"MAX_NUMBER_OF_GAUSS_EXCEEDED"<<endl;
+            exit(EXIT_SUCCESS);
+        }
+    }
+    // Calculate the bias force and add it for each tau step
+    size_t N_tau = S.size(); // or N_tau = S_2.size()
+    for (int i_atom = 0; i_atom < N; ++ i_atom) {
+        for (int i_dim = 0; i_dim < dim; ++i_dim) {
+            double f_tau = 0; // the biasing force as per each atom per each dimension
+            for (size_t i_tau = 0; i_tau < N_tau; ++ i_tau) {
+                double s_tau = S[i_tau];
+                double s_2_tau = S_2[i_tau];
+                double gauss = meta_w * exp(- pow((meta_Q6 - s_tau), 2) / (2 * pow(meta_sig, 2))) * exp(- pow((my_potential_energy_ - s_2_tau), 2) / (2 * pow(meta_sig_2, 2)));
+                f_tau += gauss * ((((meta_Q6 - s_tau)/pow(meta_sig, 2)) * ds_dr[i_atom][i_dim]) + (((my_potential_energy_ - s_2_tau)/pow(meta_sig_2, 2)) * (-1) * (nF_[i_atom][i_dim])));
+            }
+            nF_[i_atom][i_dim] += f_tau;
+        }
+    }
+
+
 }

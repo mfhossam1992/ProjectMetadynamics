@@ -32,7 +32,8 @@ class MD {
     double ** A;
     double ** nF;
     double ** nA;
-    vector<double> S; // updated gaussian center positions
+    vector<double> S; // updated gaussian center positions for Q6
+    vector<double> S_2; // updated gaussian center positions for my_potential_energy_
     //int n_gauss = 0; // number of added gaussians (Re-Decalred beneath with bunch of other MTD variables)
     double Ta; // Anderson theromstat temperature
     double eta; // Anderson thermostat parameter
@@ -75,6 +76,7 @@ class MD {
     // MTD_Gaussian_Parameters
     double meta_w;
     double meta_sig;
+    double meta_sig_2 = 0;
     int max_n_gauss;
     int meta_tau;
     //private methods
@@ -105,6 +107,7 @@ class MD {
     void calculate_Q6(double &, double ** &, double *** &); // Q_6 or meta_n_Q6 or meta_Q6, distance table, displacement table, runs calculate_Ql with order 6 and assign the value of Q_l to Q_6 or meta_n_Q6 or meta_Q6
     void calculate_ds_dr(double ** &); //(natom,ndim) position array, corresponding Q6 to position array
     void meta(double ** &, int, double ** &);//(natom,ndim) Force varibale the function will update, step number,(natom,ndim) position array
+    void meta_2(double ** &, int, double ** &); //(natom,ndim) Force varibale the function will update, step number,(natom,ndim) position array
     
     //functions in output.py
     void output(string, string); // filename, thermo_output
@@ -112,6 +115,7 @@ class MD {
 public:
     MD(Init*&, bool anderson, double Ta_, double eta_,bool mtd, double rc_, double meta_rc_, double h_, string output_fileName_, int steps,string trajFileName); // pointer to Init Object, anderson, thermostat desired temperature, thermostat parameter,mtd, lj rc, mtd nn cutoff, timestep size, outputfileName, total number of MD steps, xyz trajectory file name
     MD(Init*&, bool anderson, double Ta_, double eta_,bool mtd, double meta_w_, double meta_sig_, int max_n_gauss_, int meta_tau_, double rc_, double meta_rc_, double h_, string output_fileName_, int steps,string trajFileName); // pointer to Init Object, anderson, thermostat desired temperature, thermostat parameter,mtd, mtd_gauss_height, mtd_gauss_width , maximum_num_gauss, gauss_deposition_frequency,lj rc, mtd nn cutoff, timestep size, outputfileName, total number of MD steps, xyz trajectory file name
+    MD(Init*&, bool anderson, double Ta_, double eta_,bool mtd, double meta_w_, double meta_sig_, double meta_sig_2,int max_n_gauss_, int meta_tau_, double rc_, double meta_rc_, double h_, string output_fileName_, int steps,string trajFileName); // pointer to Init Object, anderson, thermostat desired temperature, thermostat parameter,mtd, mtd_gauss_height, mtd_gauss_width , maximum_num_gauss, gauss_deposition_frequency,lj rc, mtd nn cutoff, timestep size, outputfileName, total number of MD steps, xyz trajectory file name
 
     virtual ~MD();
     void simulate(); // main function to perform simulation
