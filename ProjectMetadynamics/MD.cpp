@@ -53,53 +53,6 @@ MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double r
     
 }
 // Constructor2_w_mtd_bias
-MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double meta_w_, double meta_sig_, int max_n_gauss_, int meta_tau_, double rc_, double metarc_, double h_, string outputfileName, int steps_, string trajFileName_):
-    N(init_->getN()),
-    dim(init_->getDim()),
-    L(init_->getL()),
-    T0(init_->getT()),
-    anderson(anderson_),
-    Ta(Ta_),
-    eta(eta_),
-    mtd(mtd_),
-    meta_w(meta_w_),
-    meta_sig(meta_sig_),
-    max_n_gauss(max_n_gauss_),
-    meta_tau(meta_tau_),
-    rc(rc_),
-    meta_rc(metarc_),
-    h(h_),
-    output_fileName(outputfileName),
-    steps(steps_),
-    traj_filename(trajFileName_)
-
-{
-    alloc_mem(N, dim);
-    alloc_mem_rv(N, dim);
-    //double ** Rptr = init_->getPosition();
-    //double ** Vptr = init_->getVelocity();
-    //for (int i_atom = 0; i_atom < N; ++i_atom) {
-    //    for (int i_dim; i_dim < dim; ++i_dim) {
-    //        R[i_atom][i_dim] = Rptr[i_atom][i_dim];
-    //        V[i_atom][i_dim] = Vptr[i_atom][i_dim];
-    //    }
-    //}
-    R = init_->getPosition();
-    V = init_->getVelocity();
-    alloc_mem3(my_displacement_table_, N, N, dim);
-    alloc_mem2(my_distance_table_, N, N);
-    my_force_on_ = new double [dim];
-    if (mtd_ == true) {
-        alloc_mem2(ds_dr, N, dim);
-        alloc_mem2(meta_nR, N, dim);
-        alloc_mem3(meta_n_my_displacement_table_, N, N, dim);
-        alloc_mem2(meta_n_my_distance_table_, N, N);
-        n_gauss = 0;
-
-    }
-    
-}
-// Constructor with MTD BIAS with 2 Collective Variables
 MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double meta_w_, double meta_sig_, double meta_sig_2_,int max_n_gauss_, int meta_tau_, double rc_, double metarc_, double h_, string outputfileName, int steps_, string trajFileName_):
     N(init_->getN()),
     dim(init_->getDim()),
@@ -147,6 +100,7 @@ MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double m
     }
     
 }
+
 
 //Destructor
 MD::~MD(){
