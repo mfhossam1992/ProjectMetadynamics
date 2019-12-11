@@ -53,7 +53,7 @@ MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double r
     
 }
 // Constructor2_w_mtd_bias
-MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double meta_w_, double meta_sig_, double meta_sig_2_,int max_n_gauss_, int meta_tau_, double rc_, double metarc_, double h_, string outputfileName, int steps_, string trajFileName_):
+MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double meta_w_, double meta_sig_, double meta_sig_2_,int max_n_gauss_, int meta_tau_, double rc_, double metarc_, double h_, string outputfileName, int steps_, string trajFileName_, int init_steps_):
     N(init_->getN()),
     dim(init_->getDim()),
     L(init_->getL()),
@@ -72,8 +72,8 @@ MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double m
     h(h_),
     output_fileName(outputfileName),
     steps(steps_),
-    traj_filename(trajFileName_)
-
+    traj_filename(trajFileName_),
+    init_steps(init_steps_)
 {
     alloc_mem(N, dim);
     alloc_mem_rv(N, dim);
@@ -380,7 +380,7 @@ void MD::simulate(){
     alloc_mem2(nF, N, dim);
     alloc_mem2(nA, N, dim);
     
-    for (int i_t = 0; i_t < steps; ++i_t) {
+    for (int i_t = 0 - init_steps; i_t < steps; ++i_t) {
         //FOR DEBUG
         //cout <<"\n\n\n\n\n\n\n THIS IS THE "<<to_string(i_t)<<"TH ITERATION\n\n\n\n\n\n\n\n";
         //END FOR DEBUG
@@ -451,7 +451,7 @@ void MD::simulate(){
         my_potential_energy(my_distance_table_); // modified its position to be used in metaD_bias
 
         // MetaDynamics Bias Forces (Still want to implement)
-        if (mtd == true) {
+        if (mtd == true && i_t >= 0) {
             if (meta_sig_2 != 0) {
                 meta_2(nF, i_t, nR);
             }
@@ -500,7 +500,7 @@ void MD::simulate(){
 
 
                 }
-                else{
+                else if (i_t >= 0){
                     if (meta_sig_2 != 0) {
                         string output_line = to_string(i_t) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "+ to_string(meta_Q6)+"  "+ to_string(my_potential_energy_);
                         output(output_fileName, output_line);
@@ -510,8 +510,8 @@ void MD::simulate(){
                     output(output_fileName, output_line);
                     }
 
-                }
-        if (i_t % 100 == 0) {
+                } 
+		if (i_t % 100 == 0) {
                         write_xyz(traj_filename, R);
 
         }

@@ -40,6 +40,7 @@ class MD {
     string output_fileName;
     string traj_filename;
     int steps;
+    int init_steps;
     //same variables as in Init Class
     int N ;
     int dim = 3; // default
@@ -115,7 +116,7 @@ class MD {
 public:
     MD(Init*&, bool anderson, double Ta_, double eta_,bool mtd, double rc_, double meta_rc_, double h_, string output_fileName_, int steps,string trajFileName); // pointer to Init Object, anderson, thermostat desired temperature, thermostat parameter,mtd, lj rc, mtd nn cutoff, timestep size, outputfileName, total number of MD steps, xyz trajectory file name
 //    MD(Init*&, bool anderson, double Ta_, double eta_,bool mtd, double meta_w_, double meta_sig_, int max_n_gauss_, int meta_tau_, double rc_, double meta_rc_, double h_, string output_fileName_, int steps,string trajFileName); // pointer to Init Object, anderson, thermostat desired temperature, thermostat parameter,mtd, mtd_gauss_height, mtd_gauss_width , maximum_num_gauss, gauss_deposition_frequency,lj rc, mtd nn cutoff, timestep size, outputfileName, total number of MD steps, xyz trajectory file name
-    MD(Init*&, bool anderson, double Ta_, double eta_,bool mtd, double meta_w_, double meta_sig_, double meta_sig_2,int max_n_gauss_, int meta_tau_, double rc_, double meta_rc_, double h_, string output_fileName_, int steps,string trajFileName); // pointer to Init Object, anderson, thermostat desired temperature, thermostat parameter,mtd, mtd_gauss_height, mtd_gauss_width , maximum_num_gauss, gauss_deposition_frequency,lj rc, mtd nn cutoff, timestep size, outputfileName, total number of MD steps, xyz trajectory file name
+    MD(Init*&, bool anderson, double Ta_, double eta_,bool mtd, double meta_w_, double meta_sig_, double meta_sig_2,int max_n_gauss_, int meta_tau_, double rc_, double meta_rc_, double h_, string output_fileName_, int steps,string trajFileName, int init_steps); // pointer to Init Object, anderson, thermostat desired temperature, thermostat parameter,mtd, mtd_gauss_height, mtd_gauss_width , maximum_num_gauss, gauss_deposition_frequency,lj rc, mtd nn cutoff, timestep size, outputfileName, total number of MD steps, xyz trajectory file name, initial steps
 
     virtual ~MD();
     void simulate(); // main function to perform simulation

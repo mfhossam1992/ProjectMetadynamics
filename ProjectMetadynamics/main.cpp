@@ -19,15 +19,15 @@ using namespace std;
 // mass
 double M = 48.0;
 // Number of Particles Per dimension
-int Ncube = 3 ;
+int Ncube = 4 ;
 // Box Side Length
-//double L = 4;
-double L = 1.56 * Ncube;
+double L = 4;
+//double L = 1.56 * Ncube;
 //double L = 1.49 * Ncube;
 // Initial Temperature
-double T0 = 0.7;
+double T0 = 0.6;
 // System Temperature
-double Ta = 0.8;
+double Ta = 0.6;
 
 // ************* MD ************* //
 
@@ -45,11 +45,12 @@ int steps = 50000;
 double h = 0.032;//
 
 // ************* MeTaD ************* //
-
+// Initial steps with simple MD
+int init_steps = 250;
 //Gaussian
 double meta_w = 0.1; // height
-double meta_sigma = 0.1; // width of Q_6
-double meta_sigma_2 = 0.1; // width of potential energy // put it to zero if not want to activate it
+double meta_sigma = 0.025; // width of Q_6
+double meta_sigma_2 = 10; // width of potential energy // put it to zero if not want to activate it
 // Maximum Number of Gaussian
 int meta_max = 1000;
 // frequency
@@ -63,7 +64,7 @@ bool mtd = true;
 
 int main(int argc, const char * argv[]) {
     
-    Init * init = new Init("fcc",Ncube,L,T0,M);
+    Init * init = new Init("sc",Ncube,L,T0,M);
    // int desired_frame_number = 11;
    // Init * init = new Init("file","/Users/hossamfarag/Desktop/Hossam/MSE485 - Fa2019/Project/metadynamics/ProjectMetadynamics/ProjectMetadynamics/Debug/init.xyz",desired_frame_number, T0,M);
     
@@ -92,7 +93,7 @@ int main(int argc, const char * argv[]) {
 
     }
     else {
-        MD md(init, anderson, Ta, eta, mtd, meta_w, meta_sigma, meta_sigma_2,meta_max, meta_tau,rc, meta_rc, h, fileName, steps,trajFileName );
+        MD md(init, anderson, Ta, eta, mtd, meta_w, meta_sigma, meta_sigma_2,meta_max, meta_tau,rc, meta_rc, h, fileName, steps,trajFileName, init_steps);
         md.simulate();
 
     }
