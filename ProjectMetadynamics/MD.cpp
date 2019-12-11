@@ -264,7 +264,7 @@ void MD::get_displacement_table(double *** & disp_table, double **& R){
     {
         
     }
-
+    delete [] disp;
     
 }
 
@@ -286,6 +286,7 @@ void MD::get_distance_table(double ** & dist_table, double ***& disp_table){
     {
         
     }
+    delete [] disp;
 
 }
 
@@ -312,6 +313,7 @@ void MD::my_potential_energy(double **& dist_table){
 }
 
 void MD::my_force_on(int i_tagged, double **& pos ){
+    double * rij = new double[dim];
    #pragma omp parallel for
     for (int i_dim = 0; i_dim < dim; ++i_dim) {
         my_force_on_[i_dim] = 0; // initialize the force to zero everytime
@@ -320,7 +322,6 @@ void MD::my_force_on(int i_tagged, double **& pos ){
         if (pos[i_atom][0] == pos [i_tagged][0] && pos[i_atom][1] == pos [i_tagged][1] && pos[i_atom][2] == pos [i_tagged][2]) {
             continue;
         }
-        double * rij = new double[dim];
         for (int i_dim = 0; i_dim < dim; ++i_dim) {
             rij[i_dim] = pos[i_tagged][i_dim] - pos [i_atom][i_dim];
             my_disp_in_box(rij);
@@ -332,11 +333,13 @@ void MD::my_force_on(int i_tagged, double **& pos ){
                 my_force_on_[i_dim] += 24 * pow(my_distance_,-8) * (2 * pow(my_distance_,-6) - 1) * rij[i_dim] ;
             }
         }
+        
     }
     #pragma omp critical
     {
         
     }
+    delete [] rij;
 }
 
 void MD::my_temperature(double & _my_kinetic_energy_){
@@ -365,7 +368,13 @@ void MD::output(string fileName, string line){
 }
 
 void MD::simulate(){
-    MD::output(output_fileName, "steps, temperature, pressure, energy, Q6\n");
+    if (meta_sig_2 == 0) {
+        MD::output(output_fileName, "steps, temperature, pressure, energy, Q6\n");
+
+    } else {
+        MD::output(output_fileName, "steps, temperature, pressure, energy, Q6, PE\n");
+
+    }
     alloc_mem2(F, N, dim);
     alloc_mem2(A, N, dim);
     alloc_mem2(nF, N, dim);
@@ -530,12 +539,12 @@ void MD::calculate_Qlm(int l, int m, double ** & dist_table, double *** & displa
     Q_lm_r_ = 0; // initialize to zero
     Q_lm_i_ = 0; // initialize to zero
     double n_bonds = 0;
+    double * rhat = new double[3];
     for (int i_atom1 = 0; i_atom1 < N; ++i_atom1) {
         for (int i_atom2 = i_atom1 + 1; i_atom2 < N; ++ i_atom2) {
             double r = dist_table[i_atom1][i_atom2];
             if (r <= meta_rc) {
                 n_bonds += 1;
-                double * rhat = new double[3];
                 for (int i_dim = 0; i_dim < dim; ++i_dim) {
                     rhat[i_dim] = displacement_table[i_atom1][i_atom2][i_dim] / r;
                 }
@@ -552,7 +561,7 @@ void MD::calculate_Qlm(int l, int m, double ** & dist_table, double *** & displa
         Q_lm_r_ /= n_bonds;
         Q_lm_i_ /= n_bonds;
     }
-    
+    delete [] rhat;
     
 }
 
@@ -611,6 +620,7 @@ void MD::calculate_ds_dr(double **  & pos){
             meta_nR[i_atom1][i_dim] -= d;
         }
     }
+    delete [] disp_;
     
 }
 

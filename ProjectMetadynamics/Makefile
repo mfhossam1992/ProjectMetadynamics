@@ -9,7 +9,7 @@ USE_GSL    = no
 USE_BOOST  = no
 
 # set system compiler and flags
-CXX	 = g++
+CXX	 = clang++
 CXXFLAGS = -c -w -std=c++11 -I$(INCLUDE) -O3
 
 MAINFLAGS =

@@ -49,7 +49,7 @@ double h = 0.032;//
 //Gaussian
 double meta_w = 0.1; // height
 double meta_sigma = 0.1; // width of Q_6
-double meta_sigma_2 = 0; // width of potential energy // put it to zero if not want to activate it
+double meta_sigma_2 = 0.1; // width of potential energy // put it to zero if not want to activate it
 // Maximum Number of Gaussian
 int meta_max = 1000;
 // frequency
