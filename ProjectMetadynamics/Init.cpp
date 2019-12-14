@@ -63,6 +63,7 @@ Init::Init(string mode, string file_name, int desired_frame, double T0_, double 
     N = stoi(ip_word);
     L = pow(N,1/3);
     ip_file.close();
+    ip_file.clear();
     Init::alloc_mem(N,dim);
     Init::from_file(fileName, desired_frame);
     Init:: gen_ran_vel(N,T0,M,1);
