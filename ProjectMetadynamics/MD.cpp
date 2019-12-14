@@ -101,6 +101,97 @@ MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double m
     
 }
 
+// Constructor1'_wo_mtd_bias_post_equil
+MD::MD(MD*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double rc_, double metarc_, double h_, string outputfileName, int steps_, string trajFileName_):
+    N(init_->getN()),
+    dim(init_->getDim()),
+    L(init_->getL()),
+    T0(init_->getT()),
+    anderson(anderson_),
+    Ta(Ta_),
+    eta(eta_),
+    mtd(mtd_),
+    rc(rc_),
+    meta_rc(metarc_),
+    h(h_),
+    output_fileName(outputfileName),
+    steps(steps_),
+    traj_filename(trajFileName_)
+
+{
+    alloc_mem(N, dim);
+    alloc_mem_rv(N, dim);
+    //double ** Rptr = init_->getPosition();
+    //double ** Vptr = init_->getVelocity();
+    //for (int i_atom = 0; i_atom < N; ++i_atom) {
+    //    for (int i_dim; i_dim < dim; ++i_dim) {
+    //        R[i_atom][i_dim] = Rptr[i_atom][i_dim];
+    //        V[i_atom][i_dim] = Vptr[i_atom][i_dim];
+    //    }
+    //}
+    R = init_->getPosition();
+    V = init_->getVelocity();
+    alloc_mem3(my_displacement_table_, N, N, dim);
+    alloc_mem2(my_distance_table_, N, N);
+    my_force_on_ = new double [dim];
+    if (mtd_ == true) {
+        alloc_mem2(ds_dr, N, dim);
+        alloc_mem2(meta_nR, N, dim);
+        alloc_mem3(meta_n_my_displacement_table_, N, N, dim);
+        alloc_mem2(meta_n_my_distance_table_, N, N);
+
+    }
+    
+}
+// Constructor2'_w_mtd_bias_post_equil
+MD::MD(MD*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double meta_w_, double meta_sig_, double meta_sig_2_,int max_n_gauss_, int meta_tau_, double rc_, double metarc_, double h_, string outputfileName, int steps_, string trajFileName_):
+    N(init_->getN()),
+    dim(init_->getDim()),
+    L(init_->getL()),
+    T0(init_->getT()),
+    anderson(anderson_),
+    Ta(Ta_),
+    eta(eta_),
+    mtd(mtd_),
+    meta_w(meta_w_),
+    meta_sig(meta_sig_),
+    meta_sig_2(meta_sig_2_),
+    max_n_gauss(max_n_gauss_),
+    meta_tau(meta_tau_),
+    rc(rc_),
+    meta_rc(metarc_),
+    h(h_),
+    output_fileName(outputfileName),
+    steps(steps_),
+    traj_filename(trajFileName_)
+
+{
+    alloc_mem(N, dim);
+    alloc_mem_rv(N, dim);
+    //double ** Rptr = init_->getPosition();
+    //double ** Vptr = init_->getVelocity();
+    //for (int i_atom = 0; i_atom < N; ++i_atom) {
+    //    for (int i_dim; i_dim < dim; ++i_dim) {
+    //        R[i_atom][i_dim] = Rptr[i_atom][i_dim];
+    //        V[i_atom][i_dim] = Vptr[i_atom][i_dim];
+    //    }
+    //}
+    R = init_->getPosition();
+    V = init_->getVelocity();
+    alloc_mem3(my_displacement_table_, N, N, dim);
+    alloc_mem2(my_distance_table_, N, N);
+    my_force_on_ = new double [dim];
+    if (mtd_ == true) {
+        alloc_mem2(ds_dr, N, dim);
+        alloc_mem2(meta_nR, N, dim);
+        alloc_mem3(meta_n_my_displacement_table_, N, N, dim);
+        alloc_mem2(meta_n_my_distance_table_, N, N);
+        n_gauss = 0;
+
+    }
+    
+}
+
 
 //Destructor
 MD::~MD(){
@@ -388,8 +479,13 @@ void MD::simulate(){
         if (anderson == true) {
             double sigma = pow((Ta / M), 0.5);
             double mean = 0;
+            //modification for temperature blowup problem
+            double my_eta_ = eta;
+            if (my_temperature_ > 2.5) {
+                my_eta_ = (my_temperature_ / 2 )* eta; // higher thermostat coupling !!
+            }
             for (int i_atom = 0; i_atom < N; ++i_atom) {
-                if ((rand()/double(RAND_MAX)) < eta * h) {
+                if ((rand()/double(RAND_MAX)) < my_eta_ * h) {
                     for (int i_dim = 0; i_dim < dim; ++i_dim) {
                         std::random_device rd{};
                         std::mt19937 gen{rd()};
@@ -693,3 +789,25 @@ void MD::meta_2(double ** & nF_, int i_t_, double ** & pos){
 
 
 }
+//geters
+double ** MD::getPosition(){
+    return MD::R;
+}
+
+double ** MD::getVelocity(){
+    return MD::V;
+}
+int MD::getN(){
+    return MD::N;
+}
+double MD::getT(){
+    return MD::my_temperature_;
+}
+double MD::getL(){
+    return MD::L;
+}
+int MD::getDim(){
+    return MD::dim;
+}
+
+//*end geters*//
