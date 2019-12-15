@@ -43,6 +43,10 @@ MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double r
     alloc_mem3(my_displacement_table_, N, N, dim);
     alloc_mem2(my_distance_table_, N, N);
     my_force_on_ = new double [dim];
+    alloc_mem2(F, N, dim);
+    alloc_mem2(A, N, dim);
+    alloc_mem2(nF, N, dim);
+    alloc_mem2(nA, N, dim);
     if (mtd_ == true) {
         alloc_mem2(ds_dr, N, dim);
         alloc_mem2(meta_nR, N, dim);
@@ -90,6 +94,10 @@ MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double m
     alloc_mem3(my_displacement_table_, N, N, dim);
     alloc_mem2(my_distance_table_, N, N);
     my_force_on_ = new double [dim];
+    alloc_mem2(F, N, dim);
+    alloc_mem2(A, N, dim);
+    alloc_mem2(nF, N, dim);
+    alloc_mem2(nA, N, dim);
     if (mtd_ == true) {
         alloc_mem2(ds_dr, N, dim);
         alloc_mem2(meta_nR, N, dim);
@@ -134,6 +142,10 @@ MD::MD(MD*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double rc_
     alloc_mem3(my_displacement_table_, N, N, dim);
     alloc_mem2(my_distance_table_, N, N);
     my_force_on_ = new double [dim];
+    alloc_mem2(F, N, dim);
+    alloc_mem2(A, N, dim);
+    alloc_mem2(nF, N, dim);
+    alloc_mem2(nA, N, dim);
     if (mtd_ == true) {
         alloc_mem2(ds_dr, N, dim);
         alloc_mem2(meta_nR, N, dim);
@@ -181,6 +193,10 @@ MD::MD(MD*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double met
     alloc_mem3(my_displacement_table_, N, N, dim);
     alloc_mem2(my_distance_table_, N, N);
     my_force_on_ = new double [dim];
+    alloc_mem2(F, N, dim);
+    alloc_mem2(A, N, dim);
+    alloc_mem2(nF, N, dim);
+    alloc_mem2(nA, N, dim);
     if (mtd_ == true) {
         alloc_mem2(ds_dr, N, dim);
         alloc_mem2(meta_nR, N, dim);
@@ -466,10 +482,6 @@ void MD::simulate(){
         MD::output(output_fileName, "steps, temperature, pressure, energy, Q6, PE\n");
 
     }
-    alloc_mem2(F, N, dim);
-    alloc_mem2(A, N, dim);
-    alloc_mem2(nF, N, dim);
-    alloc_mem2(nA, N, dim);
     
     for (int i_t = 0; i_t < steps; ++i_t) {
         //FOR DEBUG
@@ -481,7 +493,7 @@ void MD::simulate(){
             double mean = 0;
             //modification for temperature blowup problem
             double my_eta_ = eta;
-            if (my_temperature_ > 2.5) {
+            if (my_temperature_ > 2) {
                 my_eta_ = (my_temperature_ / 2 )* eta; // higher thermostat coupling !!
             }
             for (int i_atom = 0; i_atom < N; ++i_atom) {
@@ -811,3 +823,165 @@ int MD::getDim(){
 }
 
 //*end geters*//
+
+
+void MD::equilibrate(){//same as simulate but with a high Temperature in the conditional thermostating (for equilibration and melting purposes
+    if (meta_sig_2 == 0) {
+        MD::output(output_fileName, "steps, temperature, pressure, energy, Q6\n");
+
+    } else {
+        MD::output(output_fileName, "steps, temperature, pressure, energy, Q6, PE\n");
+
+    }
+
+    
+    for (int i_t = 0; i_t < steps; ++i_t) {
+        //FOR DEBUG
+        //cout <<"\n\n\n\n\n\n\n THIS IS THE "<<to_string(i_t)<<"TH ITERATION\n\n\n\n\n\n\n\n";
+        //END FOR DEBUG
+        // Anderson Thermostat
+        if (anderson == true) {
+            double sigma = pow((Ta / M), 0.5);
+            double mean = 0;
+            //modification for temperature blowup problem
+            double my_eta_ = eta;
+            if (my_temperature_ > 6) {
+                my_eta_ = (my_temperature_ / 2 )* eta; // higher thermostat coupling !!
+            }
+            for (int i_atom = 0; i_atom < N; ++i_atom) {
+                if ((rand()/double(RAND_MAX)) < my_eta_ * h) {
+                    for (int i_dim = 0; i_dim < dim; ++i_dim) {
+                        std::random_device rd{};
+                        std::mt19937 gen{rd()};
+                        std::normal_distribution<> dist{mean,sigma};
+                        V[i_atom][i_dim] = dist(gen);
+                    }
+
+                }
+            }
+        }
+
+        // *********** Propagation ************** //
+        // Calculate Forces
+        #pragma omp parallel for
+        for (int i_atom = 0; i_atom < N; ++i_atom) {
+            my_force_on(i_atom, R);
+            for (int i_dim = 0; i_dim < dim; ++i_dim) {
+                F[i_atom][i_dim] = my_force_on_[i_dim];
+                A[i_atom][i_dim] = (1/M) * F[i_atom][i_dim];
+            }
+        }
+        #pragma omp critical
+        {
+            
+        }
+        // Calculate new Positions
+        verletNextR(nR, R, V, A, h);
+//        //DEBUG
+//        cout << "\n Unwrapped NEW POSITION\n" ;
+//        for (int i_atom = 0; i_atom < N; ++i_atom) {
+//            cout << nR[i_atom][0] << " , " << nR[i_atom][1] << " , " << nR[i_atom][2] << endl;
+//
+//        }
+        my_pos_in_box(nR);
+//        cout << "\n NEW POSITION\n" ;
+//        for (int i_atom = 0; i_atom < N; ++i_atom) {
+//            cout << nR[i_atom][0] << " , " << nR[i_atom][1] << " , " << nR[i_atom][2] << endl;
+//
+//        }
+//
+//        //END_DEBUG
+
+        // Calculate Forces with new Positions
+        #pragma omp parallel for
+        for (int i_atom = 0; i_atom < N; ++i_atom) {
+            my_force_on(i_atom, nR);
+            for (int i_dim = 0; i_dim < dim; ++i_dim) {
+                nF[i_atom][i_dim] = my_force_on_[i_dim];
+                nA[i_atom][i_dim] = (1/M) * nF[i_atom][i_dim];
+            }
+        }
+        #pragma omp critical
+    {
+            
+        }
+        // Get Displacement Table
+        get_displacement_table(my_displacement_table_,nR);
+        get_distance_table(my_distance_table_,my_displacement_table_);
+        my_potential_energy(my_distance_table_); // modified its position to be used in metaD_bias
+
+        // MetaDynamics Bias Forces (Still want to implement)
+        if (mtd == true) {
+            if (meta_sig_2 != 0) {
+                meta_2(nF, i_t, nR);
+            }
+            else meta(nF, i_t, nR);
+                  
+            for (int i_atom = 0; i_atom < N; ++i_atom) {
+                for (int i_dim = 0; i_dim < dim; ++i_dim) {
+                    nA[i_atom][i_dim] = (1/M) * nF[i_atom][i_dim];
+                }
+            }
+        }
+        // Calculate New velocities
+        verletNextV(nV, V, A, nA, h);
+        // update positions
+#pragma omp parallel for
+        for (int i_atom = 0; i_atom < N; ++i_atom) {
+            for (int i_dim = 0; i_dim < dim; ++i_dim) {
+                R[i_atom][i_dim] = nR [i_atom][i_dim];
+                V[i_atom][i_dim] = nV [i_atom][i_dim];
+            }
+        }
+        #pragma omp critical
+        {
+            
+        }
+        // Measuring physical Quantities
+        my_kinetic_energy(V);
+        my_temperature(my_kinetic_energy_);
+        //my_potential_energy(my_distance_table_);
+        double E_tot = my_kinetic_energy_ + my_potential_energy_; // my_potential_energy_ is calculated before MTD BIAS because we use it in bias as well
+        my_pressure(my_temperature_, R, nF);
+                // left is meta_Q6 method -- calculate_Q6()
+        
+        // output results
+        //if (i_t  % 50 == 0) {
+            //int step = i_t + 1;
+            //cout.precision(15);
+            //cout<<my_temperature_;
+         //   #pragma omp critical
+         //   {
+                if (mtd == false) {
+                    calculate_Q6(Q_6,my_distance_table_, my_displacement_table_);
+                    string output_line = to_string(i_t) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "+ to_string(Q_6);
+                    output(output_fileName, output_line);
+
+
+
+                }
+                else{
+                    if (meta_sig_2 != 0) {
+                        string output_line = to_string(i_t) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "+ to_string(meta_Q6)+"  "+ to_string(my_potential_energy_);
+                        output(output_fileName, output_line);
+                    }
+                    else {
+                    string output_line = to_string(i_t) + "  " + to_string(my_temperature_) + "  " + to_string(my_pressure_) + "  " + to_string(E_tot)+"  "+ to_string(meta_Q6);
+                    output(output_fileName, output_line);
+                    }
+
+                }
+        if (i_t % 100 == 0) {
+                        write_xyz(traj_filename, R);
+
+        }
+       // }
+            
+       // }
+    }
+    
+}
+
+void MD::setTa(double & Ta_){
+    MD::Ta = Ta_;
+}

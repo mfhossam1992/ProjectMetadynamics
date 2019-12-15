@@ -103,7 +103,7 @@
 		D7A6AEE6239CB2A70056FBD0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Hossam Farag";
 				TargetAttributes = {
 					D7A6AEED239CB2A70056FBD0 = {
@@ -260,6 +260,7 @@
 		D7A6AEF6239CB2A70056FBD0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -268,6 +269,7 @@
 		D7A6AEF7239CB2A70056FBD0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

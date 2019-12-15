@@ -123,6 +123,7 @@ public:
 
     virtual ~MD();
     void simulate(); // main function to perform simulation
+    void equilibrate(); // main function to perform simulation
     //double * simulate_mtd();
     //getters
     double ** getPosition();
@@ -131,7 +132,8 @@ public:
     double getT();
     double getL();
     int getDim();
-
+    //Setters
+    void setTa(double & Ta_); //sets the thermostat Temperature
    
 
     

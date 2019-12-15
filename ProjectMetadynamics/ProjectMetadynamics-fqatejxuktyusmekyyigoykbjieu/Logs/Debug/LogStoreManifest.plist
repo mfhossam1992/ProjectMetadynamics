@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>10</integer>
+	<key>logs</key>
+	<dict>
+		<key>0E0E3912-1088-440F-AAC2-27428328BB95</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>0E0E3912-1088-440F-AAC2-27428328BB95.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598061416.34452796</real>
+			<key>timeStoppedRecording</key>
+			<real>598061448.19641995</real>
+			<key>title</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>0E0E3912-1088-440F-AAC2-27428328BB95</string>
+		</dict>
+		<key>2B34FBB6-6776-4DB0-9D4C-281C7FD5AEAB</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>2B34FBB6-6776-4DB0-9D4C-281C7FD5AEAB.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598062516.74164605</real>
+			<key>timeStoppedRecording</key>
+			<real>598062535.36025798</real>
+			<key>title</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>2B34FBB6-6776-4DB0-9D4C-281C7FD5AEAB</string>
+		</dict>
+		<key>3D18A4B6-AA25-4264-B736-C605BA571A98</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>3D18A4B6-AA25-4264-B736-C605BA571A98.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598061586.96278095</real>
+			<key>timeStoppedRecording</key>
+			<real>598062252.09290802</real>
+			<key>title</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>3D18A4B6-AA25-4264-B736-C605BA571A98</string>
+		</dict>
+		<key>68859724-D924-4B8B-BCCE-BB5D988FBAE8</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>68859724-D924-4B8B-BCCE-BB5D988FBAE8.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598057960.60121906</real>
+			<key>timeStoppedRecording</key>
+			<real>598059627.150635</real>
+			<key>title</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>68859724-D924-4B8B-BCCE-BB5D988FBAE8</string>
+		</dict>
+		<key>6E5C902E-1357-4DA1-AE18-EA6771CE359A</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>6E5C902E-1357-4DA1-AE18-EA6771CE359A.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598055862.63706803</real>
+			<key>timeStoppedRecording</key>
+			<real>598056811.37103605</real>
+			<key>title</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>6E5C902E-1357-4DA1-AE18-EA6771CE359A</string>
+		</dict>
+		<key>77F36B8D-AE73-4264-AB49-D56246AB74BE</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>77F36B8D-AE73-4264-AB49-D56246AB74BE.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598056881.69054198</real>
+			<key>timeStoppedRecording</key>
+			<real>598057895.14328098</real>
+			<key>title</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>77F36B8D-AE73-4264-AB49-D56246AB74BE</string>
+		</dict>
+		<key>85C74B42-8194-4207-A965-E6A55439F615</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>85C74B42-8194-4207-A965-E6A55439F615.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598055381.12260902</real>
+			<key>timeStoppedRecording</key>
+			<real>598055440.92764902</real>
+			<key>title</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>85C74B42-8194-4207-A965-E6A55439F615</string>
+		</dict>
+		<key>8E84494C-AD19-4876-9347-91DB93B2A9E6</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>8E84494C-AD19-4876-9347-91DB93B2A9E6.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598062421.64615202</real>
+			<key>timeStoppedRecording</key>
+			<real>598062429.72666705</real>
+			<key>title</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>8E84494C-AD19-4876-9347-91DB93B2A9E6</string>
+		</dict>
+		<key>C8FD7ABF-5314-43B6-BFA0-3F49C17AFDD1</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>C8FD7ABF-5314-43B6-BFA0-3F49C17AFDD1.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598055455.20763004</real>
+			<key>timeStoppedRecording</key>
+			<real>598055637.86902595</real>
+			<key>title</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>C8FD7ABF-5314-43B6-BFA0-3F49C17AFDD1</string>
+		</dict>
+		<key>D82F1111-C02D-4087-A815-11CB625348CB</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>D82F1111-C02D-4087-A815-11CB625348CB.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598061514.81673002</real>
+			<key>timeStoppedRecording</key>
+			<real>598061567.85783505</real>
+			<key>title</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>D82F1111-C02D-4087-A815-11CB625348CB</string>
+		</dict>
+		<key>DA511C07-9EA1-4B25-8B69-4C40DF6961E9</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>DA511C07-9EA1-4B25-8B69-4C40DF6961E9.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598059651.89737499</real>
+			<key>timeStoppedRecording</key>
+			<real>598061397.60547101</real>
+			<key>title</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>DA511C07-9EA1-4B25-8B69-4C40DF6961E9</string>
+		</dict>
+		<key>F29A3062-B501-450F-8B65-AEA984FBC2CD</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>F29A3062-B501-450F-8B65-AEA984FBC2CD.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598054764.24787498</real>
+			<key>timeStoppedRecording</key>
+			<real>598054940.14333105</real>
+			<key>title</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>F29A3062-B501-450F-8B65-AEA984FBC2CD</string>
+		</dict>
+		<key>F387C57D-EA86-4BA8-9ED0-F9A76F2E01CC</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>F387C57D-EA86-4BA8-9ED0-F9A76F2E01CC.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598070624.55006504</real>
+			<key>timeStoppedRecording</key>
+			<real>598070643.53163898</real>
+			<key>title</key>
+			<string>Debug ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>F387C57D-EA86-4BA8-9ED0-F9A76F2E01CC</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
