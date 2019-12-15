@@ -50,14 +50,14 @@ Init::Init(string mode, int Ncube_, double L_, double T0_, double M_):
     
    
 }
-//constructor from file
+//constructor1 from file
 Init::Init(string mode, string file_name, int desired_frame, double T0_, double M_):
-    fileName(file_name),
+    fileName_r(file_name),
     T0(T0_),
     M(M_)
 {
     ifstream ip_file;
-    ip_file.open(fileName);
+    ip_file.open(fileName_r);
     string ip_word;
     ip_file >> ip_word;
     N = stoi(ip_word);
@@ -65,8 +65,25 @@ Init::Init(string mode, string file_name, int desired_frame, double T0_, double 
     ip_file.close();
     ip_file.clear();
     Init::alloc_mem(N,dim);
-    Init::from_file(fileName, desired_frame);
+    Init::from_file_r(fileName_r, desired_frame);
     Init:: gen_ran_vel(N,T0,M,1);
+}
+//constructor2 from file
+Init::Init(string mode, string file_name_r, string file_name_v, int desired_frame):
+    fileName_r(file_name_r),
+    fileName_v(file_name_v)
+{
+    ifstream ip_file;
+    ip_file.open(fileName_r);
+    string ip_word;
+    ip_file >> ip_word;
+    N = stoi(ip_word);
+    L = pow(N,1/3);
+    ip_file.close();
+    ip_file.clear();
+    Init::alloc_mem(N,dim);
+    Init::from_file_r(fileName_r, desired_frame);
+    Init::from_file_v(fileName_v, desired_frame);
 }
 
 //destructor
@@ -242,7 +259,7 @@ void Init::gen_ran_vel(int N_, double T0_, double M_, unsigned int seed = 1){
 }
 
 
-void Init::from_file(string filename, int desired_frame){
+void Init::from_file_r(string filename, int desired_frame){
     ifstream ip_file;
     ip_file.open(filename);
     string ip_word;
@@ -255,6 +272,29 @@ void Init::from_file(string filename, int desired_frame){
             for (int i_dim = 0; i_dim < dim; ++i_dim) {
                 ip_file >> ip_word;
                 position[i_atom][i_dim] = stod(ip_word);
+            }
+        }
+        if (frame == desired_frame ) {
+            break;
+        }
+        ++frame;
+        
+    }
+    
+}
+void Init::from_file_v(string filename, int desired_frame){
+    ifstream ip_file;
+    ip_file.open(filename);
+    string ip_word;
+    int frame = 0;
+    while (ip_file >> ip_word) {
+        getline(ip_file,ip_word);
+        getline(ip_file,ip_word);
+        for (int i_atom = 0; i_atom < N; ++i_atom) {
+            ip_file >> ip_word; // skip Ar
+            for (int i_dim = 0; i_dim < dim; ++i_dim) {
+                ip_file >> ip_word;
+                velocity[i_atom][i_dim] = stod(ip_word);
             }
         }
         if (frame == desired_frame ) {

@@ -24,7 +24,8 @@ using namespace std;
 
 class Init {
     //private members
-    string fileName; // in case of loading from file
+    string fileName_r; // in case of loading from file (position)
+    string fileName_v; // in case of loading from file (velocities)
     int Ncube;
     int N ;
     int dim = 3; // default
@@ -40,7 +41,8 @@ class Init {
     void gen_fcc(int,double);
     void gen_rand(int,double);
     void gen_ran_vel(int, double, double, unsigned int); // N , T0, M, seed
-    void from_file(string, int); // filename, desired frame number
+    void from_file_r(string, int); // filename, desired frame number // this function reads positions
+    void from_file_v(string, int); //filename, desired frame number // this function reads velocities
     
     
     
@@ -50,6 +52,7 @@ public:
     Init(int, double, double, double); // Ncube, L, T0, M
     Init(string, int, double, double, double); // mode, Ncube, L, T0, M
     Init(string, string, int, double, double); // mode, filename, desired_frame_number,  T0, M
+    Init(string, string, string, int); // mode, filename_r, filename_v, desired_frame_number
 
     //destructor
     virtual ~Init();

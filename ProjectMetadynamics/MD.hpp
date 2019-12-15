@@ -16,6 +16,7 @@
 #include <fstream>
 #include <iostream>
 #include <random>
+#include <cstring>
 
 //#ifdef BOOST
 #include <boost/math/special_functions/spherical_harmonic.hpp>
@@ -39,6 +40,7 @@ class MD {
     double eta; // Anderson thermostat parameter
     string output_fileName;
     string traj_filename;
+    string traj_v_filename;
     int steps;
     //same variables as in Init Class
     int N ;

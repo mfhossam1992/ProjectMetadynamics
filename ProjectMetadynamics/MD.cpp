@@ -621,6 +621,7 @@ void MD::simulate(){
                 }
         if (i_t % 100 == 0) {
                         write_xyz(traj_filename, R);
+                        write_xyz(("v_" + traj_filename), V);
 
         }
        // }
@@ -634,7 +635,11 @@ void MD::write_xyz(string traj_file_name, double ** & pos){
     ofstream output_file;
     output_file.open(traj_file_name, ios_base::app);
     output_file << to_string(N) << endl;
-    output_file << "Atom Positions" << endl;
+    if (traj_file_name.substr(0,1).compare("v") == 0) {
+            output_file << "Atom Veclocities" << endl;
+
+    }
+    else output_file << "Atom Positions" << endl;
     for (int i_atom = 0; i_atom < N; ++i_atom) {
            output_file << "Ar\t" << to_string(pos[i_atom][0])<<"  "<< to_string(pos[i_atom][1])<<"  "<<to_string(pos[i_atom][2])<<"  "<<endl;
             }
@@ -973,6 +978,8 @@ void MD::equilibrate(){//same as simulate but with a high Temperature in the con
                 }
         if (i_t % 100 == 0) {
                         write_xyz(traj_filename, R);
+                        write_xyz(("v_" + traj_filename), V);
+
 
         }
        // }
