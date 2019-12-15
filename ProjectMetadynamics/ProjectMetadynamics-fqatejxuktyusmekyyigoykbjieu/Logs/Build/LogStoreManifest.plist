@@ -6,6 +6,312 @@
 	<integer>10</integer>
 	<key>logs</key>
 	<dict>
+		<key>0114830E-5144-4544-AF57-7613B50C9A3F</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>0114830E-5144-4544-AF57-7613B50C9A3F.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598140018.98834801</real>
+			<key>timeStoppedRecording</key>
+			<real>598140022.06505203</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>0114830E-5144-4544-AF57-7613B50C9A3F</string>
+		</dict>
+		<key>096C2FA3-EDB8-486F-B203-056049EE01B5</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>096C2FA3-EDB8-486F-B203-056049EE01B5.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598139072.05478501</real>
+			<key>timeStoppedRecording</key>
+			<real>598139075.84806597</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>096C2FA3-EDB8-486F-B203-056049EE01B5</string>
+		</dict>
+		<key>120A20F8-E252-4ADD-88EA-9AE8EE4E1045</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>120A20F8-E252-4ADD-88EA-9AE8EE4E1045.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598140496.00729799</real>
+			<key>timeStoppedRecording</key>
+			<real>598140497.75223994</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>120A20F8-E252-4ADD-88EA-9AE8EE4E1045</string>
+		</dict>
+		<key>2E849E2A-6C76-49F2-8593-57691C5387FD</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>2E849E2A-6C76-49F2-8593-57691C5387FD.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598140507.80697</real>
+			<key>timeStoppedRecording</key>
+			<real>598140509.50188303</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>2E849E2A-6C76-49F2-8593-57691C5387FD</string>
+		</dict>
+		<key>32AD6C9B-0FD4-4D65-9424-F5A5899872BD</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>32AD6C9B-0FD4-4D65-9424-F5A5899872BD.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598139229.90426505</real>
+			<key>timeStoppedRecording</key>
+			<real>598139234.38105798</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>32AD6C9B-0FD4-4D65-9424-F5A5899872BD</string>
+		</dict>
+		<key>35860FC9-B635-4B66-A981-7FB94A29AA11</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>35860FC9-B635-4B66-A981-7FB94A29AA11.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598140582.46760201</real>
+			<key>timeStoppedRecording</key>
+			<real>598140584.076846</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>35860FC9-B635-4B66-A981-7FB94A29AA11</string>
+		</dict>
+		<key>36CBAFC9-C9CF-4A36-981F-CB6C619F37EA</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>36CBAFC9-C9CF-4A36-981F-CB6C619F37EA.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598138597.38633394</real>
+			<key>timeStoppedRecording</key>
+			<real>598138600.99664295</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>36CBAFC9-C9CF-4A36-981F-CB6C619F37EA</string>
+		</dict>
+		<key>3E5811D9-0B0D-46A7-A62A-77D5C8136FF3</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>3E5811D9-0B0D-46A7-A62A-77D5C8136FF3.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598138524.343279</real>
+			<key>timeStoppedRecording</key>
+			<real>598138528.55380797</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>3E5811D9-0B0D-46A7-A62A-77D5C8136FF3</string>
+		</dict>
+		<key>4031F6BE-4C8D-4A6B-9B59-B35028643E28</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>4031F6BE-4C8D-4A6B-9B59-B35028643E28.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598139395.82412601</real>
+			<key>timeStoppedRecording</key>
+			<real>598139398.93314505</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>4031F6BE-4C8D-4A6B-9B59-B35028643E28</string>
+		</dict>
 		<key>411C1433-611A-49BA-B908-0DB134233DFB</key>
 		<dict>
 			<key>className</key>
@@ -40,7 +346,7 @@
 			<key>uniqueIdentifier</key>
 			<string>411C1433-611A-49BA-B908-0DB134233DFB</string>
 		</dict>
-		<key>4A38ADA4-639F-4067-923C-0C8306D42B67</key>
+		<key>436924B1-4C57-433B-ACD6-174860DCBB61</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -49,7 +355,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>4A38ADA4-639F-4067-923C-0C8306D42B67.xcactivitylog</string>
+			<string>436924B1-4C57-433B-ACD6-174860DCBB61.xcactivitylog</string>
 			<key>hasPrimaryLog</key>
 			<true/>
 			<key>primaryObservable</key>
@@ -66,15 +372,15 @@
 			<key>signature</key>
 			<string>Build ProjectMetadynamics</string>
 			<key>timeStartedRecording</key>
-			<real>598082578.43853903</real>
+			<real>598140272.66496599</real>
 			<key>timeStoppedRecording</key>
-			<real>598082586.41652298</real>
+			<real>598140272.69055498</real>
 			<key>title</key>
 			<string>Build ProjectMetadynamics</string>
 			<key>uniqueIdentifier</key>
-			<string>4A38ADA4-639F-4067-923C-0C8306D42B67</string>
+			<string>436924B1-4C57-433B-ACD6-174860DCBB61</string>
 		</dict>
-		<key>9D29FE0B-118C-484A-AF3B-FF18BF0BAC78</key>
+		<key>43F2333E-FF8F-4DD0-8B8B-9E6EBEB08F47</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogSection</string>
@@ -83,13 +389,13 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>9D29FE0B-118C-484A-AF3B-FF18BF0BAC78.xcactivitylog</string>
+			<string>43F2333E-FF8F-4DD0-8B8B-9E6EBEB08F47.xcactivitylog</string>
 			<key>hasPrimaryLog</key>
 			<true/>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
-				<string>E</string>
+				<string>W</string>
 			</dict>
 			<key>schemeIdentifier-containerName</key>
 			<string>ProjectMetadynamics project</string>
@@ -100,13 +406,421 @@
 			<key>signature</key>
 			<string>Build ProjectMetadynamics</string>
 			<key>timeStartedRecording</key>
-			<real>598083577.08576596</real>
+			<real>598138461.36221898</real>
 			<key>timeStoppedRecording</key>
-			<real>598083583.84075797</real>
+			<real>598138464.42052102</real>
 			<key>title</key>
 			<string>Build ProjectMetadynamics</string>
 			<key>uniqueIdentifier</key>
-			<string>9D29FE0B-118C-484A-AF3B-FF18BF0BAC78</string>
+			<string>43F2333E-FF8F-4DD0-8B8B-9E6EBEB08F47</string>
+		</dict>
+		<key>5F7973B7-4FDF-4C8F-AA32-355F6F391ED7</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>5F7973B7-4FDF-4C8F-AA32-355F6F391ED7.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598138005.05497897</real>
+			<key>timeStoppedRecording</key>
+			<real>598138008.63050699</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>5F7973B7-4FDF-4C8F-AA32-355F6F391ED7</string>
+		</dict>
+		<key>61A897D2-D98E-450A-96F9-394101D740C3</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>61A897D2-D98E-450A-96F9-394101D740C3.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598137946.13729596</real>
+			<key>timeStoppedRecording</key>
+			<real>598137949.86964798</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>61A897D2-D98E-450A-96F9-394101D740C3</string>
+		</dict>
+		<key>7AAB2CF9-4C4E-42A4-832F-B61A142F0E61</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>7AAB2CF9-4C4E-42A4-832F-B61A142F0E61.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598140476.81717503</real>
+			<key>timeStoppedRecording</key>
+			<real>598140481.36655295</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>7AAB2CF9-4C4E-42A4-832F-B61A142F0E61</string>
+		</dict>
+		<key>7F250B71-9B5E-44E1-AEA1-955136AAF9DA</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>7F250B71-9B5E-44E1-AEA1-955136AAF9DA.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598144490.13383806</real>
+			<key>timeStoppedRecording</key>
+			<real>598144494.27657795</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>7F250B71-9B5E-44E1-AEA1-955136AAF9DA</string>
+		</dict>
+		<key>82BD77FC-F59E-4E70-908D-65CA4BD4F06A</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>82BD77FC-F59E-4E70-908D-65CA4BD4F06A.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598138503.96094</real>
+			<key>timeStoppedRecording</key>
+			<real>598138508.27542603</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>82BD77FC-F59E-4E70-908D-65CA4BD4F06A</string>
+		</dict>
+		<key>865B33A8-4290-4EC1-AF69-6649E2D8CBF8</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>865B33A8-4290-4EC1-AF69-6649E2D8CBF8.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598140264.16954803</real>
+			<key>timeStoppedRecording</key>
+			<real>598140265.63691103</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>865B33A8-4290-4EC1-AF69-6649E2D8CBF8</string>
+		</dict>
+		<key>89BC17FB-1D94-418E-8945-2EB7EA79D8FC</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>89BC17FB-1D94-418E-8945-2EB7EA79D8FC.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598138483.80152702</real>
+			<key>timeStoppedRecording</key>
+			<real>598138487.95393205</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>89BC17FB-1D94-418E-8945-2EB7EA79D8FC</string>
+		</dict>
+		<key>94DF1E10-C68D-4E4F-B128-A014DCA02EF7</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>94DF1E10-C68D-4E4F-B128-A014DCA02EF7.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598139939.90451097</real>
+			<key>timeStoppedRecording</key>
+			<real>598139946.80565906</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>94DF1E10-C68D-4E4F-B128-A014DCA02EF7</string>
+		</dict>
+		<key>A88740E3-8081-45E6-97B0-8ED8837F37B1</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A88740E3-8081-45E6-97B0-8ED8837F37B1.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598144400.904562</real>
+			<key>timeStoppedRecording</key>
+			<real>598144403.92666996</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>A88740E3-8081-45E6-97B0-8ED8837F37B1</string>
+		</dict>
+		<key>D15A0807-78C6-4FDA-B7BC-50B05CF71A5D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D15A0807-78C6-4FDA-B7BC-50B05CF71A5D.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598137853.39455795</real>
+			<key>timeStoppedRecording</key>
+			<real>598137858.29330206</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>D15A0807-78C6-4FDA-B7BC-50B05CF71A5D</string>
+		</dict>
+		<key>DFC68EE2-77CF-4937-88E4-41C43F748C16</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>DFC68EE2-77CF-4937-88E4-41C43F748C16.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598139515.73895705</real>
+			<key>timeStoppedRecording</key>
+			<real>598139523.33564198</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>DFC68EE2-77CF-4937-88E4-41C43F748C16</string>
+		</dict>
+		<key>FC6D672C-07BD-4A01-8C6E-27A92A058DAD</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>FC6D672C-07BD-4A01-8C6E-27A92A058DAD.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>ProjectMetadynamics project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ProjectMetadynamics</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>timeStartedRecording</key>
+			<real>598144374.41801405</real>
+			<key>timeStoppedRecording</key>
+			<real>598144379.38168097</real>
+			<key>title</key>
+			<string>Build ProjectMetadynamics</string>
+			<key>uniqueIdentifier</key>
+			<string>FC6D672C-07BD-4A01-8C6E-27A92A058DAD</string>
 		</dict>
 	</dict>
 </dict>

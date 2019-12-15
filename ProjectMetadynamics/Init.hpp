@@ -52,7 +52,7 @@ public:
     Init(int, double, double, double); // Ncube, L, T0, M
     Init(string, int, double, double, double); // mode, Ncube, L, T0, M
     Init(string, string, int, double, double); // mode, filename, desired_frame_number,  T0, M
-    Init(string, string, string, int); // mode, filename_r, filename_v, desired_frame_number
+    Init(string, string, string, int, double); // mode, filename_r, filename_v, desired_frame_number, T0
 
     //destructor
     virtual ~Init();

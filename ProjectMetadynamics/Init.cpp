@@ -61,7 +61,9 @@ Init::Init(string mode, string file_name, int desired_frame, double T0_, double 
     string ip_word;
     ip_file >> ip_word;
     N = stoi(ip_word);
-    L = pow(N,1/3);
+    Ncube = int(pow((N/4.0),1/3.0));
+    //L = pow(N,1/3); // For SC Structures
+    L = 1.587401052 * Ncube; //For FCC Structures and rho = 1
     ip_file.close();
     ip_file.clear();
     Init::alloc_mem(N,dim);
@@ -69,16 +71,19 @@ Init::Init(string mode, string file_name, int desired_frame, double T0_, double 
     Init:: gen_ran_vel(N,T0,M,1);
 }
 //constructor2 from file
-Init::Init(string mode, string file_name_r, string file_name_v, int desired_frame):
+Init::Init(string mode, string file_name_r, string file_name_v, int desired_frame, double T0_):
     fileName_r(file_name_r),
-    fileName_v(file_name_v)
+    fileName_v(file_name_v),
+    T0(T0_)
 {
     ifstream ip_file;
     ip_file.open(fileName_r);
     string ip_word;
     ip_file >> ip_word;
     N = stoi(ip_word);
-    L = pow(N,1/3);
+    Ncube = int(pow((N/4.0),1/3.0));
+    //L = pow(N,1/3); // For SC Structures
+    L = (1.587401052 * Ncube); //For FCC Structures and rho = 1
     ip_file.close();
     ip_file.clear();
     Init::alloc_mem(N,dim);

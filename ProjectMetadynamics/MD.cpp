@@ -39,7 +39,10 @@ MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double r
     //    }
     //}
     R = init_->getPosition();
+    //my_pos_in_box(R);
     V = init_->getVelocity();
+    my_kinetic_energy(V);
+    my_temperature(my_kinetic_energy_);
     alloc_mem3(my_displacement_table_, N, N, dim);
     alloc_mem2(my_distance_table_, N, N);
     my_force_on_ = new double [dim];
@@ -90,7 +93,10 @@ MD::MD(Init*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double m
     //    }
     //}
     R = init_->getPosition();
+    //my_pos_in_box(R);
     V = init_->getVelocity();
+    my_kinetic_energy(V);
+    my_temperature(my_kinetic_energy_);
     alloc_mem3(my_displacement_table_, N, N, dim);
     alloc_mem2(my_distance_table_, N, N);
     my_force_on_ = new double [dim];
@@ -138,7 +144,10 @@ MD::MD(MD*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double rc_
     //    }
     //}
     R = init_->getPosition();
+    //my_pos_in_box(R);
     V = init_->getVelocity();
+    my_kinetic_energy(V);
+    my_temperature(my_kinetic_energy_);
     alloc_mem3(my_displacement_table_, N, N, dim);
     alloc_mem2(my_distance_table_, N, N);
     my_force_on_ = new double [dim];
@@ -189,7 +198,10 @@ MD::MD(MD*& init_, bool anderson_, double Ta_, double eta_,bool mtd_, double met
     //    }
     //}
     R = init_->getPosition();
+    //my_pos_in_box(R);
     V = init_->getVelocity();
+    my_kinetic_energy(V);
+    my_temperature(my_kinetic_energy_);
     alloc_mem3(my_displacement_table_, N, N, dim);
     alloc_mem2(my_distance_table_, N, N);
     my_force_on_ = new double [dim];
@@ -488,16 +500,23 @@ void MD::simulate(){
         //cout <<"\n\n\n\n\n\n\n THIS IS THE "<<to_string(i_t)<<"TH ITERATION\n\n\n\n\n\n\n\n";
         //END FOR DEBUG
         // Anderson Thermostat
-        if (anderson == true) {
+        if (anderson == true && i_t != 0) {
             double sigma = pow((Ta / M), 0.5);
             double mean = 0;
             //modification for temperature blowup problem
-            double my_eta_ = eta;
-            if (my_temperature_ > 2) {
-                my_eta_ = (my_temperature_ / 2 )* eta; // higher thermostat coupling !!
+            //double my_eta_ = eta;
+            bool brendsen_flag = false;
+            if (my_temperature_ > (1.3 * Ta) || my_temperature_ < (0.7 * Ta)) { // Apply Brendsen Re-scaling Thermostat
+                //my_eta_ = (my_temperature_ / Ta )* eta; // higher thermostat coupling !!
+                brendsen_flag = true;
             }
             for (int i_atom = 0; i_atom < N; ++i_atom) {
-                if ((rand()/double(RAND_MAX)) < my_eta_ * h) {
+                if (brendsen_flag == true) {
+                    for (int i_dim = 0; i_dim < dim; ++i_dim) {
+                        V[i_atom][i_dim] *= pow((Ta/my_temperature_),0.5);
+                        }
+                }
+                else if ((rand()/double(RAND_MAX)) < eta * h) {
                     for (int i_dim = 0; i_dim < dim; ++i_dim) {
                         std::random_device rd{};
                         std::mt19937 gen{rd()};
